@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-006-col-increment-multi-asset.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745318806220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745318806220,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-006          # e.g., FEAT-001, ISSUE-002\r\nType: Issue  # Choose one: Issue or Feature\r\nStatus: Backlog # Choose one\r\nPriority: Medium # Choose one\r\nLabels: [core, bug, map_processing, multi_asset] # Add relevant labels from the list or define new ones\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated: #FEAT-004-handle-multi-asset-inputs.md # Links to other tickets (e.g., #ISSUE-YYY), relevant files, or external URLs\r\n---\r\n\r\n# [ISSUE-006]: COL-# Suffixes Incorrectly Increment Across Multi-Asset Inputs\r\n\r\n## Description\r\nWhen processing an input (ZIP or folder) that contains files for multiple distinct assets, the numeric suffixes applied to map types listed in `RESPECT_VARIANT_MAP_TYPES` (such as \"COL\") are currently incremented globally across all files in the input, rather than being reset and incremented independently for each detected asset group.\r\n\r\n## Current Behavior\r\nIf an input contains files for AssetA (e.g., AssetA_COL.png, AssetA_COL_Variant.png) and AssetB (e.g., AssetB_COL.png), the output might incorrectly number them as AssetA_COL-1.png, AssetA_COL-2.png, and AssetB_COL-3.png. The expectation is that numbering should restart for each asset, resulting in AssetA_COL-1.png, AssetA_COL-2.png, and AssetB_COL-1.png.\r\n\r\n## Desired Behavior / Goals\r\nThe numeric suffix for map types in `RESPECT_VARIANT_MAP_TYPES` should be determined and applied independently for each distinct asset detected within a multi-asset input. The numbering should start from -1 for each asset group.\r\n\r\n## Implementation Notes (Optional)\r\n- The logic for assigning suffixes is primarily within `AssetProcessor._inventory_and_classify_files`.\r\n- This method currently classifies all files from the input together before determining asset groups.\r\n- The classification logic needs to be adjusted to perform suffix assignment *after* files have been grouped by their determined asset name.\r\n- This might require modifying the output of `_inventory_and_classify_files` or adding a new step after `_determine_base_metadata` to re-process or re-structure the classified files per asset for suffix assignment.\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Processing a multi-asset input containing multiple \"COL\" variants for different assets results in correct COL-# suffixes starting from -1 for each asset's output files.\r\n*   [ ] The GUI preview accurately reflects the correct COL-# numbering for each file based on its predicted asset name.\r\n*   [ ] The CLI processing output confirms the correct numbering in the generated filenames."
+        }
+    ]
+}

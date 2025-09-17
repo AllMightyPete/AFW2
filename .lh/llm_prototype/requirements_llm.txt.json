@@ -1,0 +1,18 @@
+{
+    "sourceFile": "llm_prototype/requirements_llm.txt",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745578468982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745578468982,
+            "name": "Commit-0",
+            "content": "# llm_prototype/requirements_llm.txt\r\nrequests"
+        }
+    ]
+}

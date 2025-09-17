@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Documentation/01_User_Guide/06_Usage_CLI.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745494377557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745507624965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n ```\r\n \r\n ## Arguments\r\n \r\n-*   `INPUT_PATH`: One or more paths to input `.zip` files or folders.\r\n+*   `INPUT_PATH`: One or more paths to input `.zip`, `.rar`, `.7z` files, or folders.\r\n \r\n ## Options\r\n \r\n *   `-p PRESET`, `--preset PRESET`: **(Required)** Name of the preset (e.g., `Poliigon`).\r\n"
+                }
+            ],
+            "date": 1745494377557,
+            "name": "Commit-0",
+            "content": "# User Guide: Usage - Command-Line Interface (CLI)\r\n\r\nThis document explains how to use the Asset Processor Tool's Command-Line Interface.\r\n\r\n## Running the CLI\r\n\r\nFrom the project root directory, run the following command:\r\n\r\n```bash\r\npython main.py [OPTIONS] INPUT_PATH [INPUT_PATH ...]\r\n```\r\n\r\n## Arguments\r\n\r\n*   `INPUT_PATH`: One or more paths to input `.zip` files or folders.\r\n\r\n## Options\r\n\r\n*   `-p PRESET`, `--preset PRESET`: **(Required)** Name of the preset (e.g., `Poliigon`).\r\n*   `-o OUTPUT_DIR`, `--output-dir OUTPUT_DIR`: Override `OUTPUT_BASE_DIR` from `config.py`.\r\n*   `-w WORKERS`, `--workers WORKERS`: Number of parallel processes (default: auto).\r\n*   `--overwrite`: Force reprocessing and overwrite existing output.\r\n*   `-v`, `--verbose`: Enable detailed DEBUG level logging.\r\n*   `--nodegroup-blend NODEGROUP_BLEND`: Path to `.blend` for node groups. Triggers script if provided. Overrides `config.py`.\r\n*   `--materials-blend MATERIALS_BLEND`: Path to `.blend` for materials. Triggers script if provided. Overrides `config.py`.\r\n\r\n## Example\r\n\r\n```bash\r\npython main.py \"C:/Downloads/WoodFine001.zip\" -p Poliigon -o \"G:/Assets/Processed\" --workers 4 --overwrite --nodegroup-blend \"G:/Blender/Libraries/NodeGroups.blend\" --materials-blend \"G:/Blender/Libraries/Materials.blend\""
+        }
+    ]
+}

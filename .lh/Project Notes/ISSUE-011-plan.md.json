@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Project Notes/ISSUE-011-plan.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745348289645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745348289645,
+            "name": "Commit-0",
+            "content": "# Plan to Resolve ISSUE-011: Blender nodegroup script creates empty assets for skipped items\r\n\r\n**Issue:** The Blender nodegroup creation script (`blenderscripts/create_nodegroups.py`) creates empty asset entries in the target .blend file for assets belonging to categories that the script is designed to skip, even though it correctly identifies them as skippable.\r\n\r\n**Root Cause:** The script creates the parent node group, marks it as an asset, and applies tags *before* checking if the asset category is one that should be skipped for full nodegroup generation.\r\n\r\n**Plan:**\r\n\r\n1.  **Analyze `blenderscripts/create_nodegroups.py` (Completed):** Confirmed that parent group creation and asset marking occur before the asset category skip check.\r\n2.  **Modify `blenderscripts/create_nodegroups.py`:**\r\n    *   Relocate the code block responsible for creating/updating the parent node group, marking it as an asset, and applying tags (currently lines 605-645) to *after* the conditional check `if asset_category not in CATEGORIES_FOR_NODEGROUP_GENERATION:` (line 646).\r\n    *   This ensures that if an asset's category is in the list of categories to be skipped, the `continue` statement will be hit before any actions are taken to create the parent asset entry in the Blender file.\r\n\r\n3.  **Testing:**\r\n    *   Use test assets that represent both categories that *should* and *should not* result in full nodegroup generation based on the `CATEGORIES_FOR_NODEGROUP_GENERATION` list.\r\n    *   Run the asset processor with these test assets, ensuring the Blender script is executed.\r\n    *   Inspect the resulting `.blend` file to confirm:\r\n        *   No `PBRSET_` node groups are created for assets belonging to skipped categories.\r\n        *   `PBRSET_` node groups are correctly created and populated for assets belonging to categories in `CATEGORIES_FOR_NODEGROUP_GENERATION`.\r\n\r\n4.  **Update Ticket Status:**\r\n    *   Once the fix is implemented and verified, update the `Status` field in `Tickets/ISSUE-011-blender-nodegroup-empty-assets.md` to `Resolved`.\r\n\r\n**Logic Flow:**\r\n\r\n```mermaid\r\ngraph TD\r\n    A[create_nodegroups.py] --> B{Load Asset Metadata};\r\n    B --> C{Determine Asset Category};\r\n    C --> D{Is Category Skipped?};\r\n    D -- Yes --> E[Exit Processing for Asset];\r\n    D -- No --> F{Create/Update Parent Group};\r\n    F --> G{Mark as Asset & Add Tags};\r\n    G --> H{Proceed with Child Group Creation etc.};"
+        }
+    ]
+}

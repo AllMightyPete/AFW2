@@ -1,0 +1,35 @@
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore Python virtual environment
+venv/
+*.pyc
+__pycache__/
+
+# Ignore build output directory
+dist/
+build/
+
+# Ignore log files
+*.log
+
+# Ignore environment variables file
+.env
+.env.*
+!.env.example # Keep example file
+
+# Ignore IDE/Editor specific files
+.vscode/
+.idea/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Windows thumbnail cache
+Thumbs.db
+gui/__pycache__
+__pycache__
+
+
+Testfiles/TestOutputs
+Testfiles_

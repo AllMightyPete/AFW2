@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-GUI-DisableDetailedPreview-Regression.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745332173688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745332173688,
+            "name": "Commit-0",
+            "content": "# ISSUE: GUI - \"Disable Detailed Preview\" feature regression\r\n\r\n**Ticket Type:** Issue\r\n**Priority:** Medium\r\n\r\n**Description:**\r\nThe \"Disable Detailed Preview\" feature in the GUI is currently not functioning correctly. When attempting to disable the detailed file preview (via the View menu), the GUI does not switch to the simpler asset list view. This regression prevents users from using the less detailed preview mode, which may impact performance or usability, especially when dealing with inputs containing a large number of files.\r\n\r\n**Steps to Reproduce:**\r\n1. Launch the GUI (`python -m gui.main_window`).\r\n2. Load an asset (ZIP or folder) into the drag and drop area. Observe the detailed preview table populating.\r\n3. Go to the \"View\" menu.\r\n4. Select/Deselect the \"Detailed File Preview\" option.\r\n\r\n**Expected Result:**\r\nThe preview table should switch between the detailed file list view and the simple asset list view when the menu option is toggled.\r\n\r\n**Actual Result:**\r\nThe preview table remains in the detailed file list view regardless of the \"Detailed File Preview\" menu option state.\r\n\r\n**Relevant Files/Components:**\r\n*   `gui/main_window.py`: Likely contains the logic for the View menu and handling the toggle state.\r\n*   `gui/prediction_handler.py`: Manages the background process that generates the detailed preview data. The GUI needs to be able to stop or not request this process when detailed preview is disabled.\r\n*   `gui/preview_table_model.py`: Manages the data and display logic for the preview table. It should adapt its display based on whether detailed preview is enabled or disabled."
+        }
+    ]
+}

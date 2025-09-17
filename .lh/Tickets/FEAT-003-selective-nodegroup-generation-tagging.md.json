@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Tickets/FEAT-003-selective-nodegroup-generation-tagging.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745307144919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745309772733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n ---\r\n ID: FEAT-003\r\n Type: Feature\r\n-Status: Backlog\r\n+Status: Complete\r\n Priority: Medium\r\n Labels: [feature, blender, metadata]\r\n Created: 2025-04-22\r\n Updated: 2025-04-22\r\n@@ -26,7 +26,7 @@\n ## Implementation Notes (Optional)\r\n (This will require modifying `blenderscripts/create_nodegroups.py` to read the `metadata.json` file, check the `category` field, and use the Blender Python API (`bpy`) to add tags to the created asset.)\r\n \r\n ## Acceptance Criteria (Optional)\r\n-*   [ ] Run the nodegroup generation script on a processed asset library containing assets of different categories (Surface, Decal, Asset).\r\n-*   [ ] Verify that nodegroups are created only for Surface and Decal assets.\r\n-*   [ ] Verify that assets in the Blender file (both those with generated nodegroups and those skipped) have a tag corresponding to their category from `metadata.json`.\n\\ No newline at end of file\n+*   [x] Run the nodegroup generation script on a processed asset library containing assets of different categories (Surface, Decal, Asset).\r\n+*   [x] Verify that nodegroups are created only for Surface and Decal assets.\r\n+*   [x] Verify that assets in the Blender file (both those with generated nodegroups and those skipped) have a tag corresponding to their category from `metadata.json`.\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1745307144919,
+            "name": "Commit-0",
+            "content": "---\r\nID: FEAT-003\r\nType: Feature\r\nStatus: Backlog\r\nPriority: Medium\r\nLabels: [feature, blender, metadata]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [FEAT-003]: Selective Nodegroup Generation and Category Tagging in Blender\r\n\r\n## Description\r\nEnhance the Blender nodegroup creation script (`blenderscripts/create_nodegroups.py`) to only generate nodegroups for assets classified as \"Surface\" or \"Decal\" based on the `category` field in their `metadata.json` file. Additionally, store the asset's category (Surface, Decal, or Asset) as a tag on the generated Blender asset for better organization and filtering within Blender.\r\n\r\n## Current Behavior\r\nThe current nodegroup generation script processes all assets found in the processed asset library root, regardless of their `category` specified in `metadata.json`. It does not add the asset's category as a tag in Blender.\r\n\r\n## Desired Behavior / Goals\r\n1.  The script should read the `category` field from the `metadata.json` file for each processed asset.\r\n2.  If the `category` is \"Surface\" or \"Decal\", the script should proceed with generating the nodegroup.\r\n3.  If the `category` is \"Asset\" (or any other category), the script should skip nodegroup generation for that asset.\r\n4.  The script should add the asset's `category` (e.g., \"Surface\", \"Decal\", \"Asset\") as a tag to the corresponding generated Blender asset.\r\n\r\n## Implementation Notes (Optional)\r\n(This will require modifying `blenderscripts/create_nodegroups.py` to read the `metadata.json` file, check the `category` field, and use the Blender Python API (`bpy`) to add tags to the created asset.)\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Run the nodegroup generation script on a processed asset library containing assets of different categories (Surface, Decal, Asset).\r\n*   [ ] Verify that nodegroups are created only for Surface and Decal assets.\r\n*   [ ] Verify that assets in the Blender file (both those with generated nodegroups and those skipped) have a tag corresponding to their category from `metadata.json`."
+        }
+    ]
+}

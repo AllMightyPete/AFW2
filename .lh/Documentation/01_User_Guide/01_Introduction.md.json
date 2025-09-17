@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Documentation/01_User_Guide/01_Introduction.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745494300926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745494300926,
+            "name": "Commit-0",
+            "content": "# User Guide: Introduction\r\n\r\nThis document provides an introduction to the Asset Processor Tool for users.\r\n\r\n## Purpose\r\n\r\nThis tool processes 3D asset source files (texture sets, models, etc., provided as ZIP archives or folders) into a standardized library format. It uses configurable presets to interpret different asset sources and automates tasks like file classification, image resizing, channel merging, and metadata generation.\r\n\r\n## Interfaces\r\n\r\nThe tool offers both a Graphical User Interface (GUI) for interactive use and a Command-Line Interface (CLI) for batch processing and scripting. It also includes a Directory Monitor for automated processing of assets dropped into a watched folder, and optional integration with Blender for automated material/nodegroup creation.\r\n\r\n## Scope\r\n\r\nThis documentation focuses on how to use the Asset Processor Tool. It assumes familiarity with basic file system operations and the concepts of 3D assets like texture sets and models. Details on environment setup, dependency installation, building the project, or deployment procedures are covered in other sections or assume standard practices."
+        }
+    ]
+}

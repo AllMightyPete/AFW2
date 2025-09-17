@@ -1,0 +1,280 @@
+{
+    "preset_name": "Dinesen",
+    "supplier_name": "Dinesen",
+    "notes": "Preset for standard Poliigon downloads. Prioritizes _xxx16 files. Moves previews etc. to Extra/. Assumes Metal/Rough workflow.",
+    "source_naming": {
+        "separator": "_",
+        "part_indices": {
+            "base_name": 0,
+            "map_type": 1
+        },
+        "glossiness_keywords": [
+            "GLOSS"
+        ]
+    },
+    "move_to_extra_patterns": [
+        "*_Preview*",
+        "*_Sphere*",
+        "*_Cube*",
+        "*_Flat*",
+        "*.txt",
+        "*.pdf",
+        "*.url",
+        "*.htm*",
+        "*_Fabric.*",
+        "*_DISP_*METALNESS*"
+    ],
+    "map_type_mapping": [
+        {
+            "target_type": "MAP_COL",
+            "keywords": [
+                "COLOR*",
+                "COL",
+                "COL-*",
+                "DIFFUSE",
+                "DIF",
+                "ALBEDO"
+            ]
+        },
+        {
+            "target_type": "MAP_NRM",
+            "keywords": [
+                "NORMAL*",
+                "NORM*",
+                "NRM*",
+                "N"
+            ],
+            "priority_keywords": [
+                "*_NRM16*",
+                "*_NM16*",
+                "*Normal16*"
+            ]
+        },
+        {
+            "target_type": "MAP_ROUGH",
+            "keywords": [
+                "ROUGHNESS",
+                "ROUGH"
+            ]
+        },
+        {
+            "target_type": "MAP_GLOSS",
+            "keywords": [
+                "GLOSS"
+            ]
+        },
+        {
+            "target_type": "MAP_AO",
+            "keywords": [
+                "AMBIENTOCCLUSION",
+                "AO"
+            ]
+        },
+        {
+            "target_type": "MAP_DISP",
+            "keywords": [
+                "DISPLACEMENT",
+                "DISP",
+                "HEIGHT",
+                "BUMP"
+            ],
+            "priority_keywords": [
+                "*_DISP16*",
+                "*_DSP16*",
+                "*DSP16*",
+                "*DISP16*",
+                "*Displacement16*",
+                "*Height16*"
+            ]
+        },
+        {
+            "target_type": "MAP_REFL",
+            "keywords": [
+                "REFLECTION",
+                "REFL",
+                "SPECULAR",
+                "SPEC"
+            ]
+        },
+        {
+            "target_type": "MAP_SSS",
+            "keywords": [
+                "SSS",
+                "SUBSURFACE*"
+            ]
+        },
+        {
+            "target_type": "MAP_FUZZ",
+            "keywords": [
+                "FUZZ"
+            ]
+        },
+        {
+            "target_type": "MAP_IDMAP",
+            "keywords": [
+                "IDMAP"
+            ]
+        },
+        {
+            "target_type": "MAP_MASK",
+            "keywords": [
+                "OPAC*",
+                "TRANSP*",
+                "MASK*",
+                "ALPHA*"
+            ]
+        },
+        {
+            "target_type": "MAP_METAL",
+            "keywords": [
+                "METAL*",
+                "METALLIC"
+            ]
+        }
+    ],
+    "asset_category_rules": {
+        "model_patterns": [
+            "*.fbx",
+            "*.obj",
+            "*.blend",
+            "*.mtl"
+        ],
+        "decal_keywords": [
+            "Decal"
+        ]
+    },
+    "archetype_rules": [
+        [
+            "Foliage",
+            {
+                "match_any": [
+                    "Plant",
+                    "Leaf",
+                    "Leaves",
+                    "Grass"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Fabric",
+            {
+                "match_any": [
+                    "Fabric",
+                    "Carpet",
+                    "Cloth",
+                    "Textile",
+                    "Leather"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Wood",
+            {
+                "match_any": [
+                    "Wood",
+                    "Timber",
+                    "Plank",
+                    "Board"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Metal",
+            {
+                "match_any": [
+                    "_Metal",
+                    "Steel",
+                    "Iron",
+                    "Gold",
+                    "Copper",
+                    "Chrome",
+                    "Aluminum",
+                    "Brass",
+                    "Bronze"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Concrete",
+            {
+                "match_any": [
+                    "Concrete",
+                    "Cement"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Ground",
+            {
+                "match_any": [
+                    "Ground",
+                    "Dirt",
+                    "Soil",
+                    "Mud",
+                    "Sand",
+                    "Gravel",
+                    "Asphalt",
+                    "Road",
+                    "Moss"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Stone",
+            {
+                "match_any": [
+                    "Stone",
+                    "Rock*",
+                    "Marble",
+                    "Granite",
+                    "Brick",
+                    "Tile",
+                    "Paving",
+                    "Pebble*",
+                    "Terrazzo",
+                    "Slate"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Plaster",
+            {
+                "match_any": [
+                    "Plaster",
+                    "Stucco",
+                    "Wall",
+                    "Paint"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Plastic",
+            {
+                "match_any": [
+                    "Plastic",
+                    "PVC",
+                    "Resin",
+                    "Rubber"
+                ],
+                "match_all": []
+            }
+        ],
+        [
+            "Glass",
+            {
+                "match_any": [
+                    "Glass"
+                ],
+                "match_all": []
+            }
+        ]
+    ]
+}

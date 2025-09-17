@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-013-merged-map-roughness-stats.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745348035401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745348035401,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-013\r\nType: Issue\r\nStatus: Backlog\r\nPriority: Medium\r\nLabels: [core, bug, refactor, image processing]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated: #REFACTOR-001-merge-from-source\r\n\r\n---\r\n\r\n# [ISSUE-013]: Image statistics calculation missing for roughness maps after merged map refactor\r\n\r\n## Description\r\nFollowing the recent refactor of the merged map processing logic, the calculation of image statistics (Min/Max/Mean) for roughness maps appears to have been omitted or broken. This data is valuable for quality control and metadata, and needs to be reimplemented for roughness maps, particularly when they are part of a merged texture like NRMRGH.\r\n\r\n## Current Behavior\r\nImage statistics (Min/Max/Mean) are not being calculated or stored for roughness maps after the merged map refactor.\r\n\r\n## Desired Behavior / Goals\r\nReimplement the image statistics calculation for roughness maps. Ensure that statistics are calculated correctly for standalone roughness maps and for roughness data when it is part of a merged map (e.g., the green channel in an NRMRGH map). The calculated statistics should be included in the `metadata.json` file for the asset.\r\n\r\n## Implementation Notes (Optional)\r\nReview the changes made during the merged map refactor (`REFACTOR-001-merge-from-source`). Identify where the image statistics calculation for roughness maps was previously handled and integrate it into the new merged map processing flow. Special consideration may be needed to extract the correct channel (green for NRMRGH) for calculation. The `_process_maps` and `_merge_maps` methods in `asset_processor.py` are likely relevant areas.\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Process an asset that includes a roughness map (standalone or as part of a merged map).\r\n*   [ ] Verify that Min/Max/Mean statistics for the roughness data are calculated.\r\n*   [ ] Confirm that the calculated roughness statistics are present and correct in the output `metadata.json` file."
+        }
+    ]
+}

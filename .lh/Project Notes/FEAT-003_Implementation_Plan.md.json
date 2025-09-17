@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Project Notes/FEAT-003_Implementation_Plan.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745309374613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745309374613,
+            "name": "Commit-0",
+            "content": "# FEAT-003: Selective Nodegroup Generation and Category Tagging - Implementation Plan\r\n\r\n**Objective:** Modify `blenderscripts/create_nodegroups.py` to read the asset category from `metadata.json`, conditionally create nodegroups for \"Surface\" and \"Decal\" assets, and add the category as a tag to the Blender asset.\r\n\r\n**Plan:**\r\n\r\n1.  **Modify `blenderscripts/create_nodegroups.py`:**\r\n    *   Locate the main loop in `blenderscripts/create_nodegroups.py` that iterates through the processed assets.\r\n    *   Inside this loop, for each asset directory, construct the path to the `metadata.json` file.\r\n    *   Read the `metadata.json` file using Python's `json` module.\r\n    *   Extract the `category` value from the parsed JSON data.\r\n    *   Implement a conditional check: If the extracted `category` is *not* \"Surface\" and *not* \"Decal\", skip the existing nodegroup creation logic for this asset and proceed to the tagging step.\r\n    *   If the `category` *is* \"Surface\" or \"Decal\", execute the existing nodegroup creation logic.\r\n    *   After the conditional nodegroup creation (or skipping), use the Blender Python API (`bpy`) to find the corresponding Blender asset (likely the created node group, if applicable, or potentially the asset representation even if the nodegroup was skipped).\r\n    *   Add the extracted `category` string as a tag to the found Blender asset.\r\n\r\n2.  **Testing:**\r\n    *   Prepare a test set of processed assets that includes examples of \"Surface\", \"Decal\", and \"Asset\" categories, each with a corresponding `metadata.json` file.\r\n    *   Run the modified `create_nodegroups.py` script within Blender, pointing it to the test asset library root.\r\n    *   Verify in Blender that:\r\n        *   Node groups were created only for the \"Surface\" and \"Decal\" assets.\r\n        *   No node groups were created for \"Asset\" category assets.\r\n        *   All processed assets (Surface, Decal, and Asset) have a tag corresponding to their category (\"Surface\", \"Decal\", or \"Asset\") in the Blender asset browser.\r\n\r\n```mermaid\r\ngraph TD\r\n    A[Start Script] --> B{Iterate Assets};\r\n    B --> C[Read metadata.json];\r\n    C --> D[Get Category];\r\n    D --> E{Category in [\"Surface\", \"Decal\"]?};\r\n    E -- Yes --> F[Create Nodegroup];\r\n    E -- No --> G[Skip Nodegroup];\r\n    F --> H[Find Blender Asset];\r\n    G --> H[Find Blender Asset];\r\n    H --> I[Add Category Tag];\r\n    I --> B;\r\n    B -- No More Assets --> J[End Script];"
+        }
+    ]
+}

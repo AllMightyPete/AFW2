@@ -1,0 +1,18 @@
+{
+    "sourceFile": "blender_addon/material_merger/blender_files/utility_nodegroups.blend",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745659512531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745659512531,
+            "name": "Commit-0",
+            "content": "# This is a placeholder file.\r\n# Replace this file with a Blender file containing the 'MaterialMerge' node group.\r\n# The node group should have the following inputs:\r\n# - Shader A (Shader)\r\n# - Shader B (Shader)\r\n# - Displacement A (Vector)\r\n# - Displacement B (Vector)\r\n# And the following outputs:\r\n# - BSDF (Shader)\r\n# - Displacement (Vector)"
+        }
+    ]
+}

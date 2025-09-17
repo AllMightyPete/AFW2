@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Project Notes/GUI_PreviewTable_Coloring_Plan.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745504994360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745504994360,
+            "name": "Commit-0",
+            "content": "# Plan: Enhance GUI Preview Table Coloring\r\n\r\n## Objective\r\n\r\nModify the GUI preview table to apply status-based text coloring to all relevant cells in a row, providing a more consistent visual indication of a file's status.\r\n\r\n## Current State\r\n\r\nThe `PreviewTableModel` in `gui/preview_table_model.py` currently applies status-based text colors only to the \"Status\" column (based on the main file's status) and the \"Additional Files\" column (based on the additional file's status). Other cells in the row do not have status-based coloring.\r\n\r\n## Proposed Change\r\n\r\nExtend the status-based text coloring logic in the `PreviewTableModel`'s `data()` method to apply the relevant status color to any cell that corresponds to either the main file or an additional file in that row.\r\n\r\n## Plan\r\n\r\n1.  **Modify the `data()` method in `gui/preview_table_model.py`:**\r\n    *   Locate the section handling the `Qt.ItemDataRole.ForegroundRole`.\r\n    *   Currently, this section checks the column index (`col`) to decide which file's status to use for coloring (main file for `COL_STATUS`, additional file for `COL_ADDITIONAL_FILES`).\r\n    *   We will change this logic to determine which file (main or additional) the *current row and column* corresponds to, and then use that file's status to look up the color.\r\n    *   For columns related to the main file (`COL_STATUS`, `COL_PREDICTED_ASSET`, `COL_ORIGINAL_PATH`, `COL_PREDICTED_OUTPUT`, `COL_DETAILS`), if the row contains a `main_file`, use the `main_file`'s status for coloring.\r\n    *   For the `COL_ADDITIONAL_FILES` column, if the row contains `additional_file_details`, use the `additional_file_details`' status for coloring.\r\n    *   If a cell does not correspond to a file (e.g., a main file column in a row that only has an additional file), return `None` for the `ForegroundRole` to use the default text color.\r\n\r\n## Detailed Steps\r\n\r\n1.  Open `gui/preview_table_model.py`.\r\n2.  Navigate to the `data()` method.\r\n3.  Find the `if role == Qt.ItemDataRole.ForegroundRole:` block.\r\n4.  Inside this block, modify the logic to determine the `status` variable based on the current `col` and the presence of `main_file` or `additional_file_details` in `row_data`.\r\n5.  Use the determined `status` to look up the color in `self.STATUS_COLORS`.\r\n6.  Return the color if found, otherwise return `None`.\r\n\r\n## Modified Color Logic Flow\r\n\r\n```mermaid\r\ngraph TD\r\n    A[data(index, role)] --> B{role == Qt.ItemDataRole.ForegroundRole?};\r\n    B -- Yes --> C{Determine relevant file for cell (row, col)};\r\n    C -- Cell corresponds to Main File --> D{Get main_file status};\r\n    C -- Cell corresponds to Additional File --> E{Get additional_file_details status};\r\n    C -- Cell is empty --> F[status = None];\r\n    D --> G{Lookup color in STATUS_COLORS};\r\n    E --> G;\r\n    F --> H[Return None];\r\n    G -- Color found --> I[Return Color];\r\n    G -- No color found --> H;\r\n    B -- No --> J[Handle other roles];\r\n    J --> K[Return data based on role];"
+        }
+    ]
+}

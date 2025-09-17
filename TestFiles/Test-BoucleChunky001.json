@@ -1,0 +1,57 @@
+ {
+  "source_rules": [
+    {
+      "input_path": "BoucleChunky001.zip",
+      "supplier_identifier": "Dinesen",
+      "preset_name": "Dinesen",
+      "assets": [
+        {
+          "asset_name": "BoucleChunky001",
+          "asset_type": "Surface",
+          "files": [
+            {
+              "file_path": "BoucleChunky001_AO_1K_METALNESS.png",
+              "item_type": "MAP_AO",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_COL_1K_METALNESS.png",
+              "item_type": "MAP_COL",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_DISP16_1K_METALNESS.png",
+              "item_type": "MAP_DISP",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_DISP_1K_METALNESS.png",
+              "item_type": "EXTRA",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_Fabric.png",
+              "item_type": "EXTRA",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_METALNESS_1K_METALNESS.png",
+              "item_type": "MAP_METAL",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_NRM_1K_METALNESS.png",
+              "item_type": "MAP_NRM",
+              "target_asset_name_override": "BoucleChunky001"
+            },
+            {
+              "file_path": "BoucleChunky001_ROUGHNESS_1K_METALNESS.png",
+              "item_type": "MAP_ROUGH",
+              "target_asset_name_override": "BoucleChunky001"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

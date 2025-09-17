@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Documentation/01_User_Guide/04_Configuration_and_Presets.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745494363263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745494363263,
+            "name": "Commit-0",
+            "content": "# User Guide: Configuration and Presets\r\n\r\nThis document explains how to configure the Asset Processor Tool and use presets.\r\n\r\n## Core Settings (`config.py`)\r\n\r\nThe tool's behavior is controlled by core settings defined in `config.py`. While primarily for developers, some settings are important for users to be aware of:\r\n\r\n*   `OUTPUT_BASE_DIR`: The default root directory where processed assets will be saved.\r\n*   `IMAGE_RESOULTIONS`: Defines the target resolutions for processed texture maps (e.g., 4K, 2K).\r\n*   `BLENDER_EXECUTABLE_PATH`: The path to your Blender installation, required for optional Blender integration.\r\n*   Other settings control aspects like default asset category, filename patterns, map merge rules, and output formats.\r\n\r\nThese settings can often be overridden via the GUI or CLI arguments.\r\n\r\n## Preset Files (`presets/*.json`)\r\n\r\nPreset files define supplier-specific rules for interpreting asset source files. They are crucial for the tool to correctly classify files and process assets from different sources.\r\n\r\n*   Presets are located in the `presets/` directory.\r\n*   Each preset is a JSON file named after the supplier (e.g., `Poliigon.json`).\r\n*   Presets contain rules based on filename patterns and keywords to identify map types, models, and other files.\r\n*   They also define how variants (like different resolutions or bit depths) are handled and how asset names and categories are determined from the source filename.\r\n\r\nWhen processing assets, you must specify which preset to use. The tool then loads the core settings from `config.py` and merges them with the rules from the selected preset to determine how to process the input.\r\n\r\nA template preset file (`presets/_template.json`) is provided as a base for creating new presets."
+        }
+    ]
+}

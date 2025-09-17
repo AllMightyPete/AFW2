@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-012-mask-map-alpha-extraction.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745347937534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745347937534,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-012\r\nType: Issue\r\nStatus: Backlog\r\nPriority: High\r\nLabels: [core, bug, image processing]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [ISSUE-012]: MASK map processing fails to extract alpha channel from RGBA images\r\n\r\n## Description\r\nWhen processing texture sets that include MASK maps provided as RGBA images, the asset processor is expected to extract the alpha channel to represent the mask. However, the current implementation appears to be converting the RGBA image to grayscale instead of isolating the alpha channel. This results in incorrect MASK maps in the processed output.\r\n\r\n## Current Behavior\r\nThe asset processor, when encountering an RGBA image classified as a MASK map, converts the image to grayscale. The alpha channel information is lost or ignored during this process.\r\n\r\n## Desired Behavior / Goals\r\nFor RGBA images classified as MASK maps, the asset processor should extract the alpha channel and use it as the content for the output MASK map. The resulting MASK map should be a single-channel (grayscale) image representing the transparency or mask information from the original alpha channel.\r\n\r\n## Implementation Notes (Optional)\r\nThe image processing logic within `asset_processor.py` (likely in the `_process_maps` method or a related helper function) needs to be updated to specifically handle RGBA input images for MASK map types. It should identify the alpha channel and save it as a single-channel output image. Libraries like OpenCV or Pillow should provide functionality for accessing individual channels.\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Process an asset with an RGBA image designated as a MASK map according to the preset.\r\n*   [ ] Verify that the output MASK map is a single-channel grayscale image.\r\n*   [ ] Confirm that the grayscale values in the output MASK map correspond to the alpha values of the original RGBA input image."
+        }
+    ]
+}

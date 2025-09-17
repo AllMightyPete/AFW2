@@ -1,0 +1,26 @@
+{
+    "sourceFile": "Tickets/ISSUE-004-color-channel-swapping.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1745307154166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745313700401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n ---\r\n ID: ISSUE-004\r\n Type: Issue\r\n-Status: Backlog\r\n+Status: Resolved\r\n Priority: High\r\n Labels: [bug, core, image-processing]\r\n Created: 2025-04-22\r\n Updated: 2025-04-22\r\n"
+                },
+                {
+                    "date": 1745335105823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,5 +25,14 @@\n \r\n ## Acceptance Criteria (Optional)\r\n *   [ ] Process an asset with a normal map and a map requiring channel packing (e.g., NRMRGH).\r\n *   [ ] Verify that the channels in the output normal map and packed map are in the correct R, G, B order.\r\n-*   [ ] Verify that the calculated image statistics (Min/Max/Mean) for Red and Blue channels accurately reflect the data in those specific channels, not the swapped data.\n\\ No newline at end of file\n+*   [ ] Verify that the calculated image statistics (Min/Max/Mean) for Red and Blue channels accurately reflect the data in those specific channels, not the swapped data.\r\n+## Resolution\r\n+The root cause was identified as a mismatch between OpenCV's default BGR channel order upon image loading (`cv2.imread`) and subsequent code assuming an RGB channel order, particularly in channel indexing during map merging (`_merge_maps`) and potentially in statistics calculation (`_calculate_image_stats`).\r\n+\r\n+The fix involved the following changes in `asset_processor.py`:\r\n+1.  **BGR to RGB Conversion:** Immediately after loading a 3-channel image using `cv2.imread` in the `_process_maps` function, the image is converted to RGB color space using `img_processed = cv2.cvtColor(img_loaded, cv2.COLOR_BGR2RGB)`. Grayscale or 4-channel images are handled appropriately without conversion.\r\n+2.  **Updated Channel Indexing:** The channel indexing logic within the `_merge_maps` function was updated to reflect the RGB order (Red = index 0, Green = index 1, Blue = index 2) when extracting channels from the now-RGB source images for merging.\r\n+3.  **Statistics Assumption Update:** Comments in `_calculate_image_stats` were updated to reflect that the input data is now expected in RGB order.\r\n+\r\n+This ensures consistent RGB channel ordering throughout the processing pipeline after the initial load.\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1745307154166,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-004\r\nType: Issue\r\nStatus: Backlog\r\nPriority: High\r\nLabels: [bug, core, image-processing]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [ISSUE-004]: Color channel swapping in image processing (Normal Maps, Stats)\r\n\r\n## Description\r\nThere appears to be a general issue with how color channels (specifically Red and Blue) are handled in several parts of the image processing pipeline. This has been observed in normal map channel packing and potentially in the calculation of image statistics per channel, where the Red and Blue channels seem to be swapped relative to their intended order.\r\n\r\n## Current Behavior\r\nWhen processing images where individual color channels are accessed or manipulated (e.g., during normal map channel packing or calculating per-channel image statistics), the Red and Blue channels appear to be swapped. For example, in normal map packing, the channel intended for Blue might contain Red data, and vice versa, while Green remains correct. This suggests a consistent R/B channel inversion issue in the underlying image processing logic.\r\n\r\n## Desired Behavior / Goals\r\nThe tool should correctly handle color channels according to standard RGB ordering in all image processing operations, including channel packing and image statistics calculation. The Red, Green, and Blue channels should consistently correspond to their intended data.\r\n\r\n## Implementation Notes (Optional)\r\n(This likely points to an issue in the image loading, channel splitting, merging, or processing functions, possibly related to the library used for image manipulation (e.g., OpenCV). Need to investigate how channels are accessed and ordered in relevant code sections like `_process_maps`, `_merge_maps`, and image statistics calculation.)\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Process an asset with a normal map and a map requiring channel packing (e.g., NRMRGH).\r\n*   [ ] Verify that the channels in the output normal map and packed map are in the correct R, G, B order.\r\n*   [ ] Verify that the calculated image statistics (Min/Max/Mean) for Red and Blue channels accurately reflect the data in those specific channels, not the swapped data."
+        }
+    ]
+}

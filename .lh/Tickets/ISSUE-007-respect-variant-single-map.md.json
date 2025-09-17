@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Tickets/ISSUE-007-respect-variant-single-map.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745320213464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745321266333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n ---\r\n ID: ISSUE-007          # e.g., FEAT-001, ISSUE-002\r\n Type: Issue  # Choose one: Issue or Feature\r\n-Status: Backlog # Choose one\r\n+Status: Resolved # Choose one\r\n Priority: Medium # Choose one\r\n Labels: [core, bug, map_processing, suffix, regression] # Add relevant labels from the list or define new ones\r\n Created: 2025-04-22\r\n Updated: 2025-04-22\r\n"
+                }
+            ],
+            "date": 1745320213464,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-007          # e.g., FEAT-001, ISSUE-002\r\nType: Issue  # Choose one: Issue or Feature\r\nStatus: Backlog # Choose one\r\nPriority: Medium # Choose one\r\nLabels: [core, bug, map_processing, suffix, regression] # Add relevant labels from the list or define new ones\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated: #ISSUE-006-col-increment-multi-asset.md # Links to other tickets (e.g., #ISSUE-YYY), relevant files, or external URLs\r\n---\r\n\r\n# [ISSUE-007]: Suffix Not Applied to Single Maps in RESPECT_VARIANT_MAP_TYPES\r\n\r\n## Description\r\nMap types listed in `config.py`'s `RESPECT_VARIANT_MAP_TYPES` (e.g., \"COL\") are expected to always receive a numeric suffix (e.g., \"-1\"), even if only one map of that type exists for a given asset. Following the fix for #ISSUE-006, this behavior is no longer occurring. Single maps of these types are now output without a suffix.\r\n\r\n## Current Behavior\r\nAn asset containing only one map file designated as \"COL\" (e.g., `AssetA_COL.png`) results in processed output files named like `AssetA_COL_4K.png`, without the `-1` suffix.\r\n\r\n## Desired Behavior / Goals\r\nAn asset containing only one map file designated as \"COL\" (or any other type listed in `RESPECT_VARIANT_MAP_TYPES`) should result in processed output files named like `AssetA_COL-1_4K.png`, correctly applying the numeric suffix even when it's the sole variant.\r\n\r\n## Implementation Notes (Optional)\r\n- The per-asset suffix assignment logic added in `AssetProcessor.process` (around line 233 in the previous diff) likely needs adjustment.\r\n- The condition `if respect_variants:` might need to be modified, or the loop/enumeration logic needs to explicitly handle the case where `len(maps_in_group) == 1` for types listed in `RESPECT_VARIANT_MAP_TYPES`.\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Processing an asset with a single \"COL\" map results in output files with the `COL-1` suffix.\r\n*   [ ] Processing an asset with multiple \"COL\" maps still results in correctly incremented suffixes (`COL-1`, `COL-2`, etc.).\r\n*   [ ] Map types *not* listed in `RESPECT_VARIANT_MAP_TYPES` continue to receive no suffix if only one exists."
+        }
+    ]
+}

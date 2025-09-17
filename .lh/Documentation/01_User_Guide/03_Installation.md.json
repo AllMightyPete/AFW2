@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Documentation/01_User_Guide/03_Installation.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745494354036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745507004268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,10 @@\n *   Python 3.8 +\r\n *   Required Python Packages (see `requirements.txt`):\r\n     *   `opencv-python` (image processing)\r\n     *   `numpy` (numerical operations)\r\n+    *   `py7zr` (7z archive support)\r\n+    *   `rarfile` (RAR archive support)\r\n     *   `PySide6` (for the GUI only)\r\n     *   `watchdog` (for the directory monitor)\r\n *   Optional Python Packages:\r\n     *   `OpenEXR` (improved `.exr` handling, recommended if processing EXR sources)\r\n"
+                }
+            ],
+            "date": 1745494354036,
+            "name": "Commit-0",
+            "content": "# User Guide: Installation\r\n\r\nThis document details the requirements and steps for installing the Asset Processor Tool.\r\n\r\n## Requirements\r\n\r\n*   Python 3.8 +\r\n*   Required Python Packages (see `requirements.txt`):\r\n    *   `opencv-python` (image processing)\r\n    *   `numpy` (numerical operations)\r\n    *   `PySide6` (for the GUI only)\r\n    *   `watchdog` (for the directory monitor)\r\n*   Optional Python Packages:\r\n    *   `OpenEXR` (improved `.exr` handling, recommended if processing EXR sources)\r\n*   **Blender:** A working installation is required for optional Blender integration. Configure the path in `config.py` or ensure it's in the system PATH.\r\n\r\n## Installation Steps\r\n\r\n1.  Navigate to the project root directory in your terminal.\r\n2.  Install core dependencies using pip:\r\n\r\n    ```bash\r\n    pip install -r requirements.txt\r\n    ```\r\n\r\n3.  If you plan to use the GUI, ensure `PySide6` is installed. It might be included in `requirements.txt`, or install separately:\r\n\r\n    ```bash\r\n    pip install PySide6\r\n    ```\r\n\r\n4.  If you plan to use the directory monitor script, ensure `watchdog` is installed. It might be included in `requirements.txt`, or install separately:\r\n\r\n    ```bash\r\n    pip install watchdog"
+        }
+    ]
+}

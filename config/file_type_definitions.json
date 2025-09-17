@@ -1,0 +1,210 @@
+{
+    "FILE_TYPE_DEFINITIONS": {
+        "MAP_COL": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#ffaa00",
+            "description": "Color/Albedo Map",
+            "examples": [
+                "_col.",
+                "_basecolor.",
+                "albedo",
+                "diffuse"
+            ],
+            "is_grayscale": false,
+            "keybind": "C",
+            "standard_type": "COL"
+        },
+        "MAP_NRM": {
+            "bit_depth_rule": "respect",
+            "color": "#cca2f1",
+            "description": "Normal Map",
+            "examples": [
+                "_nrm.",
+                "_normal."
+            ],
+            "is_grayscale": false,
+            "keybind": "N",
+            "standard_type": "NRM"
+        },
+        "MAP_METAL": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#dcf4f2",
+            "description": "Metalness Map",
+            "examples": [
+                "_metal.",
+                "_met."
+            ],
+            "is_grayscale": true,
+            "keybind": "M",
+            "standard_type": "METAL"
+        },
+        "MAP_ROUGH": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#bfd6bf",
+            "description": "Roughness Map",
+            "examples": [
+                "_rough.",
+                "_rgh.",
+                "_gloss"
+            ],
+            "is_grayscale": true,
+            "keybind": "R",
+            "standard_type": "ROUGH"
+        },
+        "MAP_GLOSS": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#d6bfd6",
+            "description": "Glossiness Map",
+            "examples": [
+                "_gloss.",
+                "_gls."
+            ],
+            "is_grayscale": true,
+            "keybind": "R",
+            "standard_type": "GLOSS"
+        },
+        "MAP_AO": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#e3c7c7",
+            "description": "Ambient Occlusion Map",
+            "examples": [
+                "_ao.",
+                "_ambientocclusion."
+            ],
+            "is_grayscale": true,
+            "keybind": "",
+            "standard_type": "AO"
+        },
+        "MAP_DISP": {
+            "bit_depth_rule": "respect",
+            "color": "#c6ddd5",
+            "description": "Displacement/Height Map",
+            "examples": [
+                "_disp.",
+                "_height."
+            ],
+            "is_grayscale": true,
+            "keybind": "D",
+            "standard_type": "DISP"
+        },
+        "MAP_REFL": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#c2c2b9",
+            "description": "Reflection/Specular Map",
+            "examples": [
+                "_refl.",
+                "_specular."
+            ],
+            "is_grayscale": true,
+            "keybind": "M",
+            "standard_type": "REFL"
+        },
+        "MAP_SSS": {
+            "bit_depth_rule": "respect",
+            "color": "#a0d394",
+            "description": "Subsurface Scattering Map",
+            "examples": [
+                "_sss.",
+                "_subsurface."
+            ],
+            "is_grayscale": true,
+            "keybind": "",
+            "standard_type": "SSS"
+        },
+        "MAP_FUZZ": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#a2d1da",
+            "description": "Fuzz/Sheen Map",
+            "examples": [
+                "_fuzz.",
+                "_sheen."
+            ],
+            "is_grayscale": true,
+            "keybind": "",
+            "standard_type": "FUZZ"
+        },
+        "MAP_IDMAP": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#ca8fb4",
+            "description": "ID Map (for masking)",
+            "examples": [
+                "_id.",
+                "_matid."
+            ],
+            "is_grayscale": false,
+            "keybind": "",
+            "standard_type": "IDMAP"
+        },
+        "MAP_MASK": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#c6e2bf",
+            "description": "Generic Mask Map",
+            "examples": [
+                "_mask."
+            ],
+            "is_grayscale": true,
+            "keybind": "",
+            "standard_type": "MASK"
+        },
+        "MAP_IMPERFECTION": {
+            "bit_depth_rule": "force_8bit",
+            "color": "#e6d1a6",
+            "description": "Imperfection Map (scratches, dust)",
+            "examples": [
+                "_imp.",
+                "_imperfection.",
+                "splatter",
+                "scratches",
+                "smudges",
+                "hairs",
+                "fingerprints"
+            ],
+            "is_grayscale": true,
+            "keybind": "",
+            "standard_type": "IMPERFECTION"
+        },
+        "MODEL": {
+            "bit_depth_rule": "",
+            "color": "#3db2bd",
+            "description": "3D Model File",
+            "examples": [
+                ".fbx",
+                ".obj"
+            ],
+            "is_grayscale": false,
+            "keybind": "",
+            "standard_type": ""
+        },
+        "EXTRA": {
+            "bit_depth_rule": "",
+            "color": "#8c8c8c",
+            "description": "asset previews or metadata",
+            "examples": [
+                ".txt",
+                ".zip",
+                "preview.",
+                "_flat.",
+                "_sphere.",
+                "_Cube.",
+                "thumb"
+            ],
+            "is_grayscale": false,
+            "keybind": "E",
+            "standard_type": "EXTRA"
+        },
+        "FILE_IGNORE": {
+            "bit_depth_rule": "",
+            "color": "#673d35",
+            "description": "File identified to be ignored due to prioritization rules (e.g., a lower bit-depth version when a higher one is present).",
+            "category": "Ignored",
+            "examples": [
+                "Thumbs.db",
+                ".DS_Store"
+            ],
+            "is_grayscale": false,
+            "keybind": "X",
+            "standard_type": "",
+            "details": {}
+        }
+    }
+}

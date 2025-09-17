@@ -1,0 +1,55 @@
+{
+    "TARGET_FILENAME_PATTERN": "{base_name}_{map_type}_{resolution}.{ext}",
+    "RESPECT_VARIANT_MAP_TYPES": [
+        "COL"
+    ],
+    "EXTRA_FILES_SUBDIR": "Extra",
+    "OUTPUT_BASE_DIR": "../Asset_Processor_Output_Tests",
+    "OUTPUT_DIRECTORY_PATTERN": "[supplier]_[assetname]",
+    "OUTPUT_FILENAME_PATTERN": "[assetname]_[maptype]_[resolution].[ext]",
+    "METADATA_FILENAME": "metadata.json",
+    "DEFAULT_NODEGROUP_BLEND_PATH": "G:/02 Content/10-19 Content/19 Catalogs/19.01 Blender Asset Catalogue/_CustomLibraries/Nodes-Linked/PBRSET-Nodes-Testing.blend",
+    "DEFAULT_MATERIALS_BLEND_PATH": "G:/02 Content/10-19 Content/19 Catalogs/19.01 Blender Asset Catalogue/_CustomLibraries/Materials-Append/PBR Materials-Testing.blend",
+    "BLENDER_EXECUTABLE_PATH": "C:/Program Files/Blender Foundation/Blender 4.4/blender.exe",
+    "PNG_COMPRESSION_LEVEL": 6,
+    "JPG_QUALITY": 98,
+    "RESOLUTION_THRESHOLD_FOR_JPG": 4096,
+    "IMAGE_RESOLUTIONS": {
+        "8K": 8192,
+        "4K": 4096,
+        "2K": 2048,
+        "1K": 1024,
+        "PREVIEW": 128
+    },
+    "ASPECT_RATIO_DECIMALS": 2,
+    "OUTPUT_FORMAT_16BIT_PRIMARY": "exr",
+    "OUTPUT_FORMAT_16BIT_FALLBACK": "png",
+    "OUTPUT_FORMAT_8BIT": "png",
+    "MAP_MERGE_RULES": [
+        {
+            "output_map_type": "MAP_NRMRGH",
+            "inputs": {
+                "R": "MAP_NRM",
+                "G": "MAP_NRM",
+                "B": "MAP_ROUGH"
+            },
+            "defaults": {
+                "R": 0.5,
+                "G": 0.5,
+                "B": 0.5
+            },
+            "output_bit_depth": "respect_inputs"
+        }
+    ],
+    "CALCULATE_STATS_RESOLUTION": "1K",
+    "DEFAULT_ASSET_CATEGORY": "Surface",
+    "TEMP_DIR_PREFIX": "_PROCESS_ASSET_",
+    "INITIAL_SCALING_MODE": "POT_DOWNSCALE",
+    "MERGE_DIMENSION_MISMATCH_STRATEGY": "USE_LARGEST",
+    "ENABLE_LOW_RESOLUTION_FALLBACK": true,
+    "LOW_RESOLUTION_THRESHOLD": 512,
+    "general_settings": {
+        "invert_normal_map_green_channel_globally": false,
+        "app_version": "Pre-Alpha"
+    }
+}

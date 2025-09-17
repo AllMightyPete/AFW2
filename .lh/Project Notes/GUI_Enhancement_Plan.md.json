@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Project Notes/GUI_Enhancement_Plan.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745269698564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745269698564,
+            "name": "Commit-0",
+            "content": "# GUI Enhancement Plan\r\n\r\n## Objective\r\n\r\nImplement two new features in the Graphical User Interface (GUI) of the Asset Processor Tool:\r\n1.  Automatically switch the preview to \"simple view\" when more than 10 input files (ZIPs or folders) are added to the queue.\r\n2.  Remove the specific visual area labeled \"Drag and drop folders here\" while keeping the drag-and-drop functionality active for the main processing panel.\r\n\r\n## Implementation Plan\r\n\r\nThe changes will be made in the `gui/main_window.py` file.\r\n\r\n1.  **Implement automatic preview switch:**\r\n    *   Locate the `add_input_paths` method.\r\n    *   After adding the `newly_added_paths` to `self.current_asset_paths`, check the total number of items in `self.current_asset_paths`.\r\n    *   If the count is greater than 10, programmatically set the state of the \"Disable Detailed Preview\" menu action (`self.toggle_preview_action`) to `checked=True`. This will automatically trigger the `update_preview` method, which will then render the simple list view.\r\n\r\n2.  **Remove the \"Drag and drop folders here\" visual area:**\r\n    *   Locate the `setup_main_panel_ui` method.\r\n    *   Find the creation of the `self.drag_drop_area` QFrame and its associated QLabel (`drag_drop_label`).\r\n    *   Add a line after the creation of `self.drag_drop_area` to hide this widget (`self.drag_drop_area.setVisible(False)`). This will remove the visual box and label while keeping the drag-and-drop functionality enabled for the main window.\r\n\r\n## Workflow Diagram\r\n\r\n```mermaid\r\ngraph TD\r\n    A[User drops files/folders] --> B{Call add_input_paths}\r\n    B --> C[Add paths to self.current_asset_paths]\r\n    C --> D{Count items in self.current_asset_paths}\r\n    D{Count > 10?} -->|Yes| E[Set toggle_preview_action.setChecked(True)]\r\n    D{Count > 10?} -->|No| F[Keep current preview state]\r\n    E --> G[update_preview triggered]\r\n    F --> G[update_preview triggered]\r\n    G --> H{Check toggle_preview_action state}\r\n    H{Checked (Simple)?} -->|Yes| I[Display simple list in preview_table]\r\n    H{Checked (Simple)?} -->|No| J[Run PredictionHandler for detailed preview]\r\n    J --> K[Display detailed results in preview_table]\r\n\r\n    L[GUI Initialization] --> M[Call setup_main_panel_ui]\r\n    M --> N[Create drag_drop_area QFrame]\r\n    N --> O[Hide drag_drop_area QFrame]\r\n    O --> P[Main window accepts drops]\r\n    P --> B"
+        }
+    ]
+}

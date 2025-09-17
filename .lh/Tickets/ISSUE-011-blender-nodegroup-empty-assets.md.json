@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-011-blender-nodegroup-empty-assets.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745347846080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745347846080,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-011\r\nType: Issue\r\nStatus: Backlog\r\nPriority: Medium\r\nLabels: [blender, bug]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [ISSUE-011]: Blender nodegroup script creates empty assets for skipped items\r\n\r\n## Description\r\nThe Blender nodegroup creation script (`blenderscripts/create_nodegroups.py`) incorrectly generates empty asset entries in the target .blend file for assets that were skipped during the main processing pipeline. This occurs even though the main asset processor correctly identifies and skips these assets based on the overwrite flag.\r\n\r\n## Current Behavior\r\nWhen running the asset processor with the `--overwrite` flag set to false, if an asset's output directory and metadata.json already exist, the main processing pipeline correctly skips processing that asset. However, the subsequent Blender nodegroup creation script still attempts to create a nodegroup for this skipped asset, resulting in an empty or incomplete asset entry in the target .blend file.\r\n\r\n## Desired Behavior / Goals\r\nThe Blender nodegroup creation script should only attempt to create nodegroups for assets that were *actually processed* by the main asset processor, not those that were skipped. It should check if the asset was processed successfully before attempting nodegroup creation.\r\n\r\n## Implementation Notes (Optional)\r\nThe `main.py` script, which orchestrates the processing and calls the Blender scripts, needs to pass information about which assets were successfully processed to the Blender nodegroup script. The Blender script should then filter its operations based on this information.\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Running the asset processor with `--overwrite` false on inputs that already have processed outputs should result in the main processing skipping the asset.\r\n*   [ ] The Blender nodegroup script, when run after a skipped processing run, should *not* create or update a nodegroup for the skipped asset.\r\n*   [ ] Only assets that were fully processed should have corresponding nodegroups created/updated by the Blender script."
+        }
+    ]
+}

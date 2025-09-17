@@ -1,0 +1,44 @@
+{
+    "ASSET_TYPE_DEFINITIONS": {
+        "Surface": {
+            "color": "#1f3e5d",
+            "description": "A single Standard PBR material set for a surface.",
+            "examples": [
+                "Set: Wood01_COL + Wood01_NRM + WOOD01_ROUGH",
+                "Set: Dif_Concrete + Normal_Concrete + Refl_Concrete"
+            ]
+        },
+        "Model": {
+            "color": "#b67300",
+            "description": "A set that contains models, can include PBR textureset",
+            "examples": [
+                "Single = Chair.fbx",
+                "Set = Plant02.fbx + Plant02_col + Plant02_SSS"
+            ]
+        },
+        "Decal": {
+            "color": "#68ac68",
+            "description": "A alphamasked textureset",
+            "examples": [
+                "Set = DecalGraffiti01_Col + DecalGraffiti01_Alpha",
+                "Single = DecalLeakStain03"
+            ]
+        },
+        "Atlas": {
+            "color": "#955b8b",
+            "description": "A texture, name usually hints that it's an atlas",
+            "examples": [
+                "Set = FoliageAtlas01_col + FoliageAtlas01_nrm"
+            ]
+        },
+        "UtilityMap": {
+            "color": "#706b87",
+            "description": "A useful image-asset consisting of only a single texture. Therefor each Utilitymap can only contain a single item.",
+            "examples": [
+                "Single = imperfection.png",
+                "Single = smudges.png",
+                "Single = scratches.tif"
+            ]
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "llm_prototype/test_inputs/dinesen_example.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745578497695,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745578497695,
+            "name": "Commit-0",
+            "content": "{\r\n  \"files\": [\r\n    \"3-HeartOak-RL-2-5m-300mm_COL-1_.jpg\",\r\n    \"3-HeartOak-RL-2-5m-300mm_DISP_.jpg\",\r\n    \"3-HeartOak-RL-2-5m-300mm_GLOSS_.jpg\",\r\n    \"3-HeartOak-RL-2-5m-300mm_NRM_.jpg\",\r\n    \"3-Oak-Classic-RL-2-5m-300mm_COL-1_.jpg\",\r\n    \"3-Oak-Classic-RL-2-5m-300mm_DISP_.jpg\",\r\n    \"3-Oak-Classic-RL-2-5m-300mm_GLOSS_.jpg\",\r\n    \"3-Oak-Classic-RL-2-5m-300mm_NRM_.jpg\"\r\n  ]\r\n}"
+        }
+    ]
+}

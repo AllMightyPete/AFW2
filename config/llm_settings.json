@@ -1,0 +1,267 @@
+{
+    "llm_predictor_examples": [
+        {
+            "input": "MessyTextures/Concrete_Damage_Set/concrete_col.png\nMessyTextures/Concrete_Damage_Set/concrete_N.png\nMessyTextures/Concrete_Damage_Set/concrete_rough.jpg\nMessyTextures/Concrete_Damage_Set/height_map_concrete.tif\nMessyTextures/Concrete_Damage_Set/Thumbs.db\nMessyTextures/Fabric_Pattern/pattern_01_diffuse.tga\nMessyTextures/Fabric_Pattern/pattern_01_ao.png\nMessyTextures/Fabric_Pattern/pattern_01_normal.png\nMessyTextures/Fabric_Pattern/notes.txt\nMessyTextures/Fabric_Pattern/variant_blue_diffuse.tga\nMessyTextures/Fabric_Pattern/fabric_flat.jpg",
+            "output": {
+                "individual_file_analysis": [
+                    {
+                        "relative_file_path": "MessyTextures/Concrete_Damage_Set/concrete_col.png",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Concrete_Damage_Set"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Concrete_Damage_Set/concrete_N.png",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Concrete_Damage_Set"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Concrete_Damage_Set/concrete_rough.jpg",
+                        "classified_file_type": "MAP_ROUGH",
+                        "proposed_asset_group_name": "Concrete_Damage_Set"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Concrete_Damage_Set/height_map_concrete.tif",
+                        "classified_file_type": "MAP_DISP",
+                        "proposed_asset_group_name": "Concrete_Damage_Set"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Concrete_Damage_Set/Thumbs.db",
+                        "classified_file_type": "FILE_IGNORE",
+                        "proposed_asset_group_name": null
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Fabric_Pattern/pattern_01_diffuse.tga",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Fabric_Pattern_01"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Fabric_Pattern/pattern_01_ao.png",
+                        "classified_file_type": "MAP_AO",
+                        "proposed_asset_group_name": "Fabric_Pattern_01"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Fabric_Pattern/pattern_01_normal.png",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Fabric_Pattern_01"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Fabric_Pattern/notes.txt",
+                        "classified_file_type": "EXTRA",
+                        "proposed_asset_group_name": "Fabric_Pattern_01"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Fabric_Pattern/variant_blue_diffuse.tga",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Fabric_Pattern_01"
+                    },
+                    {
+                        "relative_file_path": "MessyTextures/Fabric_Pattern/fabric_flat.jpg",
+                        "classified_file_type": "EXTRA",
+                        "proposed_asset_group_name": "Fabric_Pattern_01"
+                    }
+                ],
+                "asset_group_classifications": {
+                    "Concrete_Damage_Set": "Surface",
+                    "Fabric_Pattern_01": "Surface"
+                }
+            }
+        },
+        {
+            "input": "SciFi_Drone/Drone_Model.fbx\nSciFi_Drone/Textures/Drone_BaseColor.png\nSciFi_Drone/Textures/Drone_Metallic.png\nSciFi_Drone/Textures/Drone_Roughness.png\nSciFi_Drone/Textures/Drone_Normal.png\nSciFi_Drone/Textures/Drone_Emissive.jpg\nSciFi_Drone/ReferenceImages/concept.jpg",
+            "output": {
+                "individual_file_analysis": [
+                    {
+                        "relative_file_path": "SciFi_Drone/Drone_Model.fbx",
+                        "classified_file_type": "MODEL",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    },
+                    {
+                        "relative_file_path": "SciFi_Drone/Textures/Drone_BaseColor.png",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    },
+                    {
+                        "relative_file_path": "SciFi_Drone/Textures/Drone_Metallic.png",
+                        "classified_file_type": "MAP_METAL",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    },
+                    {
+                        "relative_file_path": "SciFi_Drone/Textures/Drone_Roughness.png",
+                        "classified_file_type": "MAP_ROUGH",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    },
+                    {
+                        "relative_file_path": "SciFi_Drone/Textures/Drone_Normal.png",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    },
+                    {
+                        "relative_file_path": "SciFi_Drone/Textures/Drone_Emissive.jpg",
+                        "classified_file_type": "EXTRA",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    },
+                    {
+                        "relative_file_path": "SciFi_Drone/ReferenceImages/concept.jpg",
+                        "classified_file_type": "EXTRA",
+                        "proposed_asset_group_name": "SciFi_Drone"
+                    }
+                ],
+                "asset_group_classifications": {
+                    "SciFi_Drone": "Model"
+                }
+            }
+        },
+        {
+            "input": "21_hairs_deposits.tif\n22_hairs_fabric.tif\n23_hairs_fibres.tif\n24_hairs_fibres.tif\n25_bonus_isolatedFingerprints.tif\n26_bonus_isolatedPalmprint.tif\n27_metal_aluminum.tif\n28_metal_castIron.tif\n29_scratcehes_deposits_shapes.tif\n30_scratches_deposits.tif",
+            "output": {
+                "individual_file_analysis": [
+                    {
+                        "relative_file_path": "21_hairs_deposits.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Hairs_Deposits_21"
+                    },
+                    {
+                        "relative_file_path": "22_hairs_fabric.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Hairs_Fabric_22"
+                    },
+                    {
+                        "relative_file_path": "23_hairs_fibres.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Hairs_Fibres_23"
+                    },
+                    {
+                        "relative_file_path": "24_hairs_fibres.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Hairs_Fibres_24"
+                    },
+                    {
+                        "relative_file_path": "25_bonus_isolatedFingerprints.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Bonus_IsolatedFingerprints_25"
+                    },
+                    {
+                        "relative_file_path": "26_bonus_isolatedPalmprint.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Bonus_IsolatedPalmprint_26"
+                    },
+                    {
+                        "relative_file_path": "27_metal_aluminum.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Metal_Aluminum_27"
+                    },
+                    {
+                        "relative_file_path": "28_metal_castIron.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Metal_CastIron_28"
+                    },
+                    {
+                        "relative_file_path": "29_scratcehes_deposits_shapes.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Scratches_Deposits_Shapes_29"
+                    },
+                    {
+                        "relative_file_path": "30_scratches_deposits.tif",
+                        "classified_file_type": "MAP_IMPERFECTION",
+                        "proposed_asset_group_name": "Scratches_Deposits_30"
+                    }
+                ],
+                "asset_group_classifications": {
+                    "Hairs_Deposits_21": "UtilityMap",
+                    "Hairs_Fabric_22": "UtilityMap",
+                    "Hairs_Fibres_23": "UtilityMap",
+                    "Hairs_Fibres_24": "UtilityMap",
+                    "Bonus_IsolatedFingerprints_25": "UtilityMap",
+                    "Bonus_IsolatedPalmprint_26": "UtilityMap",
+                    "Metal_Aluminum_27": "UtilityMap",
+                    "Metal_CastIron_28": "UtilityMap",
+                    "Scratches_Deposits_Shapes_29": "UtilityMap",
+                    "Scratches_Deposits_30": "UtilityMap"
+                }
+            }
+        },
+        {
+            "input": "Part1/TextureSupply_Boards001_A_28x300cm-Albedo.jpg\nPart1/TextureSupply_Boards001_A_28x300cm-Normal.jpg\nPart1/TextureSupply_Boards001_B_28x300cm-Albedo.jpg\nPart1/TextureSupply_Boards001_B_28x300cm-Normal.jpg\nPart1/TextureSupply_Boards001_C_28x300cm-Albedo.jpg\nPart1/TextureSupply_Boards001_C_28x300cm-Normal.jpg\nPart1/TextureSupply_Boards001_D_28x300cm-Albedo.jpg\nPart1/TextureSupply_Boards001_D_28x300cm-Normal.jpg\nPart1/TextureSupply_Boards001_E_28x300cm-Albedo.jpg\nPart1/TextureSupply_Boards001_E_28x300cm-Normal.jpg\nPart1/TextureSupply_Boards001_F_28x300cm-Albedo.jpg\nPart1/TextureSupply_Boards001_F_28x300cm-Normal.jpg",
+            "output": {
+                "individual_file_analysis": [
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_A_28x300cm-Albedo.jpg",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Boards001_A"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_A_28x300cm-Normal.jpg",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Boards001_A"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_B_28x300cm-Albedo.jpg",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Boards001_B"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_B_28x300cm-Normal.jpg",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Boards001_B"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_C_28x300cm-Albedo.jpg",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Boards001_C"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_C_28x300cm-Normal.jpg",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Boards001_C"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_D_28x300cm-Albedo.jpg",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Boards001_D"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_D_28x300cm-Normal.jpg",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Boards001_D"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_E_28x300cm-Albedo.jpg",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Boards001_E"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_E_28x300cm-Normal.jpg",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Boards001_E"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_F_28x300cm-Albedo.jpg",
+                        "classified_file_type": "MAP_COL",
+                        "proposed_asset_group_name": "Boards001_F"
+                    },
+                    {
+                        "relative_file_path": "Part1/TextureSupply_Boards001_F_28x300cm-Normal.jpg",
+                        "classified_file_type": "MAP_NRM",
+                        "proposed_asset_group_name": "Boards001_F"
+                    }
+                ],
+                "asset_group_classifications": {
+                    "Boards001_A": "Surface",
+                    "Boards001_B": "Surface",
+                    "Boards001_C": "Surface",
+                    "Boards001_D": "Surface",
+                    "Boards001_E": "Surface",
+                    "Boards001_F": "Surface"
+                }
+            }
+        }
+    ],
+    "asset_type_definition_format": "{KEY} = {DESCRIPTION}, examples of content of {KEY} could be: {EXAMPLES}",
+    "file_type_definition_format": "{KEY} = {DESCRIPTION}, examples of keywords for {KEY} could be: {EXAMPLES}",
+    "llm_endpoint_url": "http://100.65.14.122:1234/v1/chat/completions",
+    "llm_api_key": "",
+    "llm_model_name": "qwen2.5-coder:3b",
+    "llm_temperature": 0.5,
+    "llm_request_timeout": 120,
+    "llm_predictor_prompt": "You are an expert asset classification system. Your task is to analyze a list of file paths, understand their relationships based on naming and directory structure, and output a structured JSON object that classifies each file individually and then classifies the logical asset groups they belong to.\\n\\nDefinitions:\\n\\nAsset Types: These define the overall category of a logical asset group. Use one of the following keys when classifying asset groups. Each definition is provided as a formatted string (e.g., 'Surface = A single PBR material set..., examples: WoodFloor01, MetalPlate05'):\\n{ASSET_TYPE_DEFINITIONS}\\n\\n\\nFile Types: These define the specific purpose of each individual file. Use one of the following keys when classifying individual files. Each definition is provided as a formatted string (e.g., 'MAP_COL = Color/Albedo Map, examples: _col., _basecolor.'):\\n{FILE_TYPE_DEFINITIONS}\\n\\n\\nCore Task & Logic:\\n\\n1.  **Individual File Analysis:**\\n    *   Examine each `relative_file_path` in the input `FILE_LIST`.\\n    *   For EACH file, determine its most likely `classified_file_type` using the `FILE_TYPE_DEFINITIONS`. Pay attention to filename suffixes, keywords, and extensions. Use `FILE_IGNORE` for files like `Thumbs.db` or `.DS_Store`. Use `EXTRA` for previews, metadata, or unidentifiable maps.\\n    *   For EACH file, propose a logical `proposed_asset_group_name` (string). This name should represent the asset the file likely belongs to, based on common base names (e.g., `WoodFloor01` from `WoodFloor01_col.png`, `WoodFloor01_nrm.png`) or directory structure (e.g., `SciFi_Drone` for files within that folder).\\n        *   Files that seem to be standalone utility maps (like `scratches.png`, `FlowMap.tif`) should get a unique group name derived from their filename (e.g., `Scratches`, `FlowMap`).\\n        *   If a file doesn't seem to belong to any logical group (e.g., a stray readme file in the root), you can propose `null` or a generic name like `Miscellaneous`.\\n        *   Be consistent with the proposed names for files belonging to the same logical asset.\\n    *   Populate the `individual_file_analysis` array with one object for *every* file in the input list, containing `relative_file_path`, `classified_file_type`, and `proposed_asset_group_name`.\\n\\n2.  **Asset Group Classification:**\\n    *   Collect all unique, non-null `proposed_asset_group_name` values generated in the previous step.\\n    *   For EACH unique group name, determine the overall `asset_type` (using `ASSET_TYPE_DEFINITIONS`) based on the types of files assigned to that group name in the `individual_file_analysis`.\\n        *   Example: If files proposed as `AssetGroup1` include `MAP_COL`, `MAP_NRM`, `MAP_ROUGH`, classify `AssetGroup1` as `Surface`.\\n        *   Example: If files proposed as `AssetGroup2` include `MODEL` and texture maps, classify `AssetGroup2` as `Model`.\\n        *   Example: If `AssetGroup3` only has one file classified as `MAP_IMPERFECTION`, classify `AssetGroup3` as `UtilityMap`.\\n    *   Populate the `asset_group_classifications` dictionary, mapping each unique `proposed_asset_group_name` to its determined `asset_type`.\\n\\nInput File List:\\n\\ntext\\n{FILE_LIST}\\n\\n\\nOutput Format:\\n\\nYour response MUST be ONLY a single JSON object. You MAY include comments (using // or /* */) within the JSON structure for clarification if needed, but the core structure must be valid JSON. Do NOT include any text, explanations, or introductory phrases before or after the JSON object itself. Ensure all strings are correctly quoted and escaped.\\n\\nCRITICAL: The output JSON structure must strictly adhere to the following format:\\n\\n```json\\n{{\\n  \"individual_file_analysis\": [\\n    {{\\n      // Optional comment about this file\\n      \"relative_file_path\": \"string\", // Exact relative path from the input list\\n      \"classified_file_type\": \"string\", // Key from FILE_TYPE_DEFINITIONS\\n      \"proposed_asset_group_name\": \"string_or_null\" // Your suggested group name for this file\\n    }}\\n    // ... one object for EVERY file in the input list\\n  ],\\n  \"asset_group_classifications\": {{\\n    // Dictionary mapping unique proposed group names to asset types\\n    \"ProposedGroupName1\": \"string\", // Key: proposed_asset_group_name, Value: Key from ASSET_TYPE_DEFINITIONS\\n    \"ProposedGroupName2\": \"string\"\\n    // ... one entry for each unique, non-null proposed_asset_group_name\\n  }}\\n}}\\n```\\n\\nExamples:\\n\\nHere are examples of input file lists and the desired JSON output, illustrating the two-part structure:\\n\\njson\\n[\\n {EXAMPLE_INPUT_OUTPUT_PAIRS}\\n]\\n\\n\\nNow, process the provided FILE_LIST and generate ONLY the JSON output according to these instructions. Remember to include an entry in `individual_file_analysis` for every single input file path."
+}

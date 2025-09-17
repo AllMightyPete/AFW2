@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/_template.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745307115578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745307115578,
+            "name": "Commit-0",
+            "content": "---\r\nID: TYPE-XXX          # e.g., FEAT-001, ISSUE-002\r\nType: Issue | Feature  # Choose one: Issue or Feature\r\nStatus: Backlog | Planned | In Progress | Blocked | Needs Review | Done | Won't Fix # Choose one\r\nPriority: Low | Medium | High # Choose one\r\nLabels: [gui, cli, core, blender, bug, feature, enhancement, docs, config] # Add relevant labels from the list or define new ones\r\nCreated: YYYY-MM-DD\r\nUpdated: YYYY-MM-DD\r\nRelated: # Links to other tickets (e.g., #ISSUE-YYY), relevant files, or external URLs\r\n---\r\n\r\n# [TYPE-XXX]: Brief Title of Issue/Feature\r\n\r\n## Description\r\n(Provide a detailed explanation of the issue or feature request. What is the problem you are trying to solve, or what is the new functionality you are proposing?)\r\n\r\n## Current Behavior\r\n(Describe what happens currently. If reporting a bug, explain the steps to reproduce it. If proposing a feature, describe the current state without the feature.)\r\n\r\n## Desired Behavior / Goals\r\n(Describe what *should* happen if the issue is resolved, or what the feature aims to achieve. Be specific about the desired outcome.)\r\n\r\n## Implementation Notes (Optional)\r\n(Add any thoughts on how this could be implemented, potential technical challenges, relevant code sections, or ideas for a solution.)\r\n\r\n## Acceptance Criteria (Optional)\r\n(Define clear, testable criteria that must be met for the ticket to be considered complete.)\r\n*   [ ] Criterion 1: The first condition that must be satisfied.\r\n*   [ ] Criterion 2: The second condition that must be satisfied.\r\n*   [ ] Add more criteria as needed."
+        }
+    ]
+}

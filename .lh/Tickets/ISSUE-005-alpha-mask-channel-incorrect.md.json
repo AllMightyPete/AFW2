@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Tickets/ISSUE-005-alpha-mask-channel-incorrect.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745307162180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745308662610,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n ---\r\n ID: ISSUE-005\r\n Type: Issue\r\n-Status: Backlog\r\n+Status: Resolved\r\n Priority: High\r\n Labels: [bug, core, image-processing]\r\n Created: 2025-04-22\r\n Updated: 2025-04-22\r\n"
+                }
+            ],
+            "date": 1745307162180,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-005\r\nType: Issue\r\nStatus: Backlog\r\nPriority: High\r\nLabels: [bug, core, image-processing]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [ISSUE-005]: Alpha Mask channel not processed correctly\r\n\r\n## Description\r\nWhen processing source images that contain an alpha channel intended for use as a MASK map, the tool's output for the MASK map is an RGBA image instead of a grayscale image derived solely from the alpha channel.\r\n\r\n## Current Behavior\r\nIf a source image (e.g., a PNG or TIF) has an alpha channel and is classified as a MASK map type, the resulting output MASK file retains the RGB channels (potentially with incorrect data or black/white values) in addition to the alpha channel, resulting in an RGBA output image.\r\n\r\n## Desired Behavior / Goals\r\nWhen processing a source image with an alpha channel for a MASK map type, the tool should extract only the alpha channel data and output a single-channel (grayscale) image representing the mask. The RGB channels from the source should be discarded for the MASK output.\r\n\r\n## Implementation Notes (Optional)\r\n(This requires modifying the image processing logic for MASK map types to specifically isolate and save only the alpha channel as a grayscale image. Need to check the relevant sections in `asset_processor.py` related to map processing and saving.)\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Process an asset containing a source image with an alpha channel intended as a MASK map.\r\n*   [ ] Verify that the output MASK file is a grayscale image (single channel) and accurately represents the alpha channel data from the source.\r\n*   [ ] Verify that the output MASK file does not contain redundant or incorrect RGB channel data."
+        }
+    ]
+}

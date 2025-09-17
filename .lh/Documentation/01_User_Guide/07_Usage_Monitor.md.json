@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Documentation/01_User_Guide/07_Usage_Monitor.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745494384510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745507755122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n ```\r\n \r\n ## Functionality\r\n \r\n-The monitor script uses the `watchdog` library to continuously monitor a specified input directory for new `.zip` files. When a new `.zip` file is detected, it expects the filename to follow the format `[preset]_filename.zip`. It extracts the preset name from the filename and automatically processes the asset using that preset. After processing, the source `.zip` file is moved to either a 'processed' directory (on success or skip) or an 'error' directory (on failure or invalid preset).\r\n+The monitor script uses the `watchdog` library to continuously monitor a specified input directory for new `.zip`, `.rar`, or `.7z` files. When a new supported archive file is detected, it expects the filename to follow the format `[preset]_filename.zip`, `[preset]_filename.rar`, or `[preset]_filename.7z`. It extracts the preset name from the filename and automatically processes the asset using that preset. After processing, the source archive file is moved to either a 'processed' directory (on success or skip) or an 'error' directory (on failure or invalid preset).\r\n \r\n **Note:** The directory monitor does *not* currently support optional Blender script execution (this is only available via the CLI or GUI).\r\n \r\n ## Configuration (Environment Variables)\r\n"
+                }
+            ],
+            "date": 1745494384510,
+            "name": "Commit-0",
+            "content": "# User Guide: Usage - Directory Monitor (Automated Processing)\r\n\r\nThis document explains how to use the Asset Processor Tool's Directory Monitor for automated processing.\r\n\r\n## Running the Monitor\r\n\r\nFrom the project root directory, run the following command:\r\n\r\n```bash\r\npython monitor.py\r\n```\r\n\r\n## Functionality\r\n\r\nThe monitor script uses the `watchdog` library to continuously monitor a specified input directory for new `.zip` files. When a new `.zip` file is detected, it expects the filename to follow the format `[preset]_filename.zip`. It extracts the preset name from the filename and automatically processes the asset using that preset. After processing, the source `.zip` file is moved to either a 'processed' directory (on success or skip) or an 'error' directory (on failure or invalid preset).\r\n\r\n**Note:** The directory monitor does *not* currently support optional Blender script execution (this is only available via the CLI or GUI).\r\n\r\n## Configuration (Environment Variables)\r\n\r\nThe monitor's behavior is configured using environment variables:\r\n\r\n*   `INPUT_DIR`: The directory to monitor (default: `/data/input`).\r\n*   `OUTPUT_DIR`: The base output directory (default: `/data/output`).\r\n*   `PROCESSED_DIR`: Directory for successful source ZIPs (default: `/data/processed`).\r\n*   `ERROR_DIR`: Directory for failed source ZIPs (default: `/data/error`).\r\n*   `LOG_LEVEL`: Logging verbosity (`INFO`, `DEBUG`) (default: `INFO`).\r\n*   `POLL_INTERVAL`: Check frequency (seconds) (default: `5`).\r\n*   `PROCESS_DELAY`: Delay before processing detected file (seconds) (default: `2`).\r\n*   `NUM_WORKERS`: Number of parallel workers (default: auto).\r\n\r\n## Output\r\n\r\nThe monitor logs messages to the console. It creates processed assets in the `OUTPUT_DIR` and moves the source `.zip` file as described above."
+        }
+    ]
+}

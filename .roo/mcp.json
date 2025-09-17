@@ -1,0 +1,46 @@
+{
+  "mcpServers": {
+    "conport": {
+      "command": "C:\\Users\\theis\\context-portal\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\theis\\context-portal\\src\\context_portal_mcp\\main.py",
+        "--mode",
+        "stdio",
+        "--workspace_id",
+        "${workspaceFolder}"
+      ],
+      "alwaysAllow": [
+        "get_product_context",
+        "update_product_context",
+        "get_active_context",
+        "update_active_context",
+        "log_decision",
+        "get_decisions",
+        "search_decisions_fts",
+        "log_progress",
+        "get_progress",
+        "update_progress",
+        "delete_progress_by_id",
+        "log_system_pattern",
+        "get_system_patterns",
+        "log_custom_data",
+        "get_custom_data",
+        "delete_custom_data",
+        "search_project_glossary_fts",
+        "export_conport_to_markdown",
+        "import_markdown_to_conport",
+        "link_conport_items",
+        "search_custom_data_value_fts",
+        "get_linked_items",
+        "batch_log_items",
+        "get_item_history",
+        "delete_decision_by_id",
+        "delete_system_pattern_by_id",
+        "get_conport_schema",
+        "get_recent_activity_summary",
+        "semantic_search_conport",
+        "search_system_patterns_fts"
+      ]
+    }
+  }
+}

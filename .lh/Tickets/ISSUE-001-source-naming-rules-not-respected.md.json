@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-001-source-naming-rules-not-respected.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745307127879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745307127879,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-001\r\nType: Issue\r\nStatus: Backlog\r\nPriority: Medium\r\nLabels: [bug, config, gui]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [ISSUE-001]: Source file naming rules from JSON are not respected\r\n\r\n## Description\r\nThe tool is not correctly applying the \"Source file naming rules\" defined in the JSON presets. Specifically, the \"base Name index\" and \"Map type index\" values within the `source_naming` section of the preset JSON are not being respected during file processing.\r\n\r\n## Current Behavior\r\nWhen processing assets, the tool (observed in the GUI) does not use the specified \"base Name index\" and \"Map type index\" from the active preset's `source_naming` rules to determine the asset's base name and individual map types from the source filenames.\r\n\r\n## Desired Behavior / Goals\r\nThe tool should accurately read and apply the \"base Name index\" and \"Map type index\" values from the selected preset's `source_naming` rules to correctly parse asset base names and map types from source filenames.\r\n\r\n## Implementation Notes (Optional)\r\n(Add any thoughts on how this could be implemented, technical challenges, relevant code sections, or ideas for a solution.)\r\n\r\n## Acceptance Criteria (Optional)\r\n(Define clear, testable criteria that must be met for the ticket to be considered complete.)\r\n*   [ ] Processing an asset with a preset that uses specific `base_name_index` and `map_type_index` values results in the correct asset name and map types being identified according to those indices.\r\n*   [ ] This behavior is consistent in both the GUI and CLI."
+        }
+    ]
+}

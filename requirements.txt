@@ -1,0 +1,7 @@
+opencv-python
+numpy
+openexr
+PySide6
+py7zr
+rarfile
+requests

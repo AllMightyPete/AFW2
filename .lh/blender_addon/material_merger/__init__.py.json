@@ -1,0 +1,22 @@
+{
+    "sourceFile": "blender_addon/material_merger/__init__.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745659312702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745659349183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,21 +12,21 @@\n \r\n import bpy\r\n \r\n # Import other modules (will be created later)\r\n-# from . import operator\r\n-# from . import panel\r\n+from . import operator\r\n+from . import panel\r\n \r\n def register():\r\n     # Register classes from imported modules\r\n-    # operator.register()\r\n-    # panel.register()\r\n+    operator.register()\r\n+    panel.register()\r\n     print(\"Material Merger Addon Registered\")\r\n \r\n def unregister():\r\n     # Unregister classes from imported modules\r\n-    # panel.unregister()\r\n-    # operator.unregister()\r\n+    panel.unregister()\r\n+    operator.unregister()\r\n     print(\"Material Merger Addon Unregistered\")\r\n \r\n if __name__ == \"__main__\":\r\n     register()\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1745659312702,
+            "name": "Commit-0",
+            "content": "bl_info = {\r\n    \"name\": \"Material Merger\",\r\n    \"author\": \"Your Name\", # Replace with your name\r\n    \"version\": (1, 0),\r\n    \"blender\": (3, 6, 0), # Minimum Blender version\r\n    \"location\": \"Shader Editor > Sidebar > Material Merger\",\r\n    \"description\": \"Merges two Asset Processor generated materials into a new material.\",\r\n    \"warning\": \"\",\r\n    \"doc_url\": \"\", # Optional documentation URL\r\n    \"category\": \"Material\",\r\n}\r\n\r\nimport bpy\r\n\r\n# Import other modules (will be created later)\r\n# from . import operator\r\n# from . import panel\r\n\r\ndef register():\r\n    # Register classes from imported modules\r\n    # operator.register()\r\n    # panel.register()\r\n    print(\"Material Merger Addon Registered\")\r\n\r\ndef unregister():\r\n    # Unregister classes from imported modules\r\n    # panel.unregister()\r\n    # operator.unregister()\r\n    print(\"Material Merger Addon Unregistered\")\r\n\r\nif __name__ == \"__main__\":\r\n    register()"
+        }
+    ]
+}

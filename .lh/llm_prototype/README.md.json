@@ -1,0 +1,18 @@
+{
+    "sourceFile": "llm_prototype/README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745578490185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745578490185,
+            "name": "Commit-0",
+            "content": "# LLM Asset Classifier Prototype\r\n\r\nThis prototype demonstrates using a Large Language Model (LLM) to classify asset files and determine metadata from a list of filenames, particularly for irregularly named inputs and sources containing multiple assets.\r\n\r\n## Setup\r\n\r\n1.  **Clone the repository:** If you haven't already, clone the main Asset Processor Tool repository.\r\n2.  **Navigate to the prototype directory:** `cd llm_prototype/`\r\n3.  **Create a Python Virtual Environment (Recommended):**\r\n    ```bash\r\n    python -m venv .venv\r\n    ```\r\n4.  **Activate the Virtual Environment:**\r\n    *   On Windows: `.venv\\Scripts\\activate`\r\n    *   On macOS/Linux: `source .venv/bin/activate`\r\n5.  **Install Dependencies:**\r\n    ```bash\r\n    pip install -r requirements_llm.txt\r\n    ```\r\n\r\n## Configuration\r\n\r\nEdit the `config_llm.py` file to configure the LLM API endpoint and other settings.\r\n\r\n*   `LLM_API_ENDPOINT`: Set this to the URL of your LLM API. This could be a commercial API (like OpenAI) or a local server (like LM Studio).\r\n*   `LLM_MODEL_NAME`: If your API requires a specific model name, set it here. Leave empty if not needed.\r\n*   `LLM_API_KEY_ENV_VAR`: If your API requires an API key, set this to the name of the environment variable where your key is stored.\r\n\r\n**Important:** Do NOT put your API key directly in `config_llm.py`. Store it in an environment variable.\r\n\r\n**Example (Windows PowerShell):**\r\n```powershell\r\n$env:OPENAI_API_KEY=\"your_api_key_here\"\r\n```\r\n\r\n**Example (Linux/macOS Bash):**\r\n```bash\r\nexport OPENAI_API_KEY=\"your_api_key_here\"\r\n```\r\n*(Replace `OPENAI_API_KEY` and `\"your_api_key_here\"` as needed based on your `LLM_API_KEY_ENV_VAR` setting and actual key.)*\r\n\r\n## Running the Prototype\r\n\r\nThe prototype takes a JSON file containing a list of filenames as input.\r\n\r\n1.  **Prepare Input:** Create a JSON file (e.g., in the `test_inputs/` directory) with a structure like this:\r\n    ```json\r\n    {\r\n      \"files\": [\r\n        \"path/to/file1.png\",\r\n        \"path/to/model.fbx\",\r\n        \"another_file.tif\"\r\n      ]\r\n    }\r\n    ```\r\n    The paths should be relative paths as they would appear within an extracted asset source directory.\r\n\r\n2.  **Execute the script:**\r\n    ```bash\r\n    python llm_classifier.py <path_to_your_input_json_file>\r\n    ```\r\n    Replace `<path_to_your_input_json_file>` with the actual path to your input JSON file (e.g., `test_inputs/dinesen_example.json`).\r\n\r\nThe script will load the configuration, format the prompt, call the LLM API, extract and validate the JSON response, and print the validated output.\r\n\r\n## Development Notes\r\n\r\n*   The LLM prompt template is in `prompt_template.txt`. Modify this file to adjust the instructions given to the LLM.\r\n*   The core logic is in `llm_classifier.py`. This includes functions for loading config/input/prompt, calling the API, extracting JSON, and validating the output.\r\n*   The validation logic in `llm_classifier.py` is crucial for ensuring the LLM's output conforms to the expected structure and values."
+        }
+    ]
+}

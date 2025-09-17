@@ -1,0 +1,10 @@
+# This is a placeholder file.
+# Replace this file with a Blender file containing the 'MaterialMerge' node group.
+# The node group should have the following inputs:
+# - Shader A (Shader)
+# - Shader B (Shader)
+# - Displacement A (Vector)
+# - Displacement B (Vector)
+# And the following outputs:
+# - BSDF (Shader)
+# - Displacement (Vector)

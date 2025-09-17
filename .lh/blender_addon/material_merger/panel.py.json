@@ -1,0 +1,18 @@
+{
+    "sourceFile": "blender_addon/material_merger/panel.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745659339974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745659339974,
+            "name": "Commit-0",
+            "content": "import bpy\r\nfrom bpy.types import Panel\r\nfrom .operator import MATERIAL_OT_merge_materials # Import the operator\r\n\r\nclass MATERIAL_PT_material_merger_panel(Panel):\r\n    \"\"\"Creates a Panel in the Shader Editor sidebar\"\"\"\r\n    bl_label = \"Material Merger\"\r\n    bl_idname = \"MATERIAL_PT_material_merger_panel\"\r\n    bl_space_type = 'NODE_EDITOR'\r\n    bl_region_type = 'UI'\r\n    bl_category = 'Tool' # Or 'Material' or a custom category\r\n\r\n    def draw(self, context):\r\n        layout = self.layout\r\n\r\n        # Get the active material in the Shader Editor\r\n        # This might be useful for defaulting one of the selectors\r\n        # mat = context.material\r\n\r\n        row = layout.row()\r\n        row.label(text=\"Select Materials to Merge:\")\r\n\r\n        # Use properties from the operator to store selected material names\r\n        # The operator will read these when executed.\r\n        # We'll use StringProperty for simplicity in the UI for now.\r\n        # A more advanced UI might use PointerProperty to bpy.data.materials\r\n\r\n        # Material A selection\r\n        row = layout.row()\r\n        row.prop(context.scene, \"material_merger_mat_a\", text=\"Material A\")\r\n\r\n        # Material B selection\r\n        row = layout.row()\r\n        row.prop(context.scene, \"material_merger_mat_b\", text=\"Material B\")\r\n\r\n\r\n        # Merge button\r\n        row = layout.row()\r\n        # Pass the selected material names to the operator when button is clicked\r\n        row.operator(MATERIAL_OT_merge_materials.bl_idname, text=MATERIAL_OT_merge_materials.bl_label).material_a_name = context.scene.material_merger_mat_a\r\n        row.operator(MATERIAL_OT_merge_materials.bl_idname, text=MATERIAL_OT_merge_materials.bl_label).material_b_name = context.scene.material_merger_mat_b\r\n\r\n\r\n# To store the selected material names, we need scene properties\r\n# These will be registered and unregistered with the addon\r\ndef register_properties():\r\n    bpy.types.Scene.material_merger_mat_a = StringProperty(\r\n        name=\"Material A Name\",\r\n        description=\"Name of the first material to merge\",\r\n        default=\"\"\r\n    )\r\n    bpy.types.Scene.material_merger_mat_b = StringProperty(\r\n        name=\"Material B Name\",\r\n        description=\"Name of the second material to merge\",\r\n        default=\"\"\r\n    )\r\n\r\ndef unregister_properties():\r\n    del bpy.types.Scene.material_merger_mat_a\r\n    del bpy.types.Scene.material_merger_mat_b\r\n\r\n\r\ndef register():\r\n    register_properties()\r\n    bpy.utils.register_class(MATERIAL_PT_material_merger_panel)\r\n    print(\"MATERIAL_PT_material_merger_panel registered\")\r\n\r\ndef unregister():\r\n    bpy.utils.unregister_class(MATERIAL_PT_material_merger_panel)\r\n    unregister_properties()\r\n    print(\"MATERIAL_PT_material_merger_panel unregistered\")\r\n\r\nif __name__ == \"__main__\":\r\n    # This block is for running the script directly in Blender's text editor\r\n    # It's useful for testing the panel layout without installing the addon\r\n    register()"
+        }
+    ]
+}

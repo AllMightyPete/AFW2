@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Tickets/ISSUE-002-incorrect-col-numbering-multiple-assets.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745307136334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745307136334,
+            "name": "Commit-0",
+            "content": "---\r\nID: ISSUE-002\r\nType: Issue\r\nStatus: Backlog\r\nPriority: High\r\nLabels: [bug, core, file-classification]\r\nCreated: 2025-04-22\r\nUpdated: 2025-04-22\r\nRelated:\r\n---\r\n\r\n# [ISSUE-002]: Incorrect COL-# numbering with multiple assets in one directory\r\n\r\n## Description\r\nWhen processing a directory containing multiple distinct asset sets (e.g., `Assetname1` and `Assetname2`), the numbering for map types that require variant suffixes (like \"COL\") is incorrectly incremented across all assets in the directory rather than being reset for each individual asset.\r\n\r\n## Current Behavior\r\nIf an input directory contains files for `Assetname1` and `Assetname2`, and both have multiple \"COL\" maps, the numbering continues sequentially across both sets. For example, `Assetname1` might get `_COL-1`, `_COL-2`, while `Assetname2` incorrectly gets `_COL-3`, `_COL-4`, instead of starting its own sequence (`_COL-1`, `_COL-2`). The \"COL value accumulates across directory, not comparing names\".\r\n\r\n## Desired Behavior / Goals\r\nThe tool should correctly identify distinct asset sets within a single input directory and apply variant numbering (like \"COL-#\") independently for each asset set. The numbering should reset for each new asset encountered in the directory.\r\n\r\n## Implementation Notes (Optional)\r\n(This likely requires adjusting the file classification or inventory logic to group files by asset name before applying variant numbering rules.)\r\n\r\n## Acceptance Criteria (Optional)\r\n*   [ ] Processing a directory containing multiple asset sets with variant map types results in correct, independent numbering for each asset set (e.g., `Assetname1_COL-1`, `Assetname1_COL-2`, `Assetname2_COL-1`, `Assetname2_COL-2`).\r\n*   [ ] The numbering is based on the files belonging to a specific asset name, not the overall count of variant maps in the entire input directory."
+        }
+    ]
+}
