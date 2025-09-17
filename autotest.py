@@ -856,7 +856,7 @@ def main():
     try:
         # Instantiate main.App() - this should create MainWindow but not show it by default
         # if App is designed to not show GUI unless app.main_window.show() is called.
-        app_instance = App()
+        app_instance = App(preset_name=cli_args.preset)
     except Exception as e:
         logger.error(f"Failed to initialize main.App: {e}", exc_info=True)
         sys.exit(1)
