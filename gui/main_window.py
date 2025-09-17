@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 log.info(f"sys.path: {sys.path}")
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QSplitter, QTableView,
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QTableView,
     QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QStackedWidget,
     QProgressBar, QLabel, QFrame, QCheckBox, QSpinBox, QListWidget, QTextEdit,
     QLineEdit, QMessageBox, QFileDialog, QInputDialog, QListWidgetItem, QTabWidget,
@@ -127,10 +127,6 @@ class MainWindow(QMainWindow):
         self.llm_interaction_handler = LLMInteractionHandler(self)
 
 
-        # --- Main Layout with Splitter ---
-        self.splitter = QSplitter(Qt.Orientation.Horizontal)
-        self.setCentralWidget(self.splitter)
-
         # --- Create Models ---
         self.unified_model = UnifiedViewModel()
         # --- Instantiate Handlers that depend on the model ---
@@ -155,22 +151,43 @@ class MainWindow(QMainWindow):
         # Instantiate MainPanelWidget, passing the model, self (MainWindow) for context, and file_type_keys
         self.main_panel_widget = MainPanelWidget(self.unified_model, self, file_type_keys=file_type_keys)
         self.log_console = LogConsoleWidget(self)
+        self.log_console.setVisible(False)
 
-        # --- Create Left Pane with Static Selector and Stacked Editor ---
-        self.left_pane_widget = QWidget()
-        left_pane_layout = QVBoxLayout(self.left_pane_widget)
-        left_pane_layout.setContentsMargins(0, 0, 0, 0)
-        left_pane_layout.setSpacing(0)
+        # --- Main Layout: Sidebar Navigation + Stacked Views ---
+        self._view_name_to_index: dict[str, int] = {}
+        self._settings_category_to_row: dict[str, int] = {}
 
-        left_pane_layout.addWidget(self.preset_editor_widget.selector_container)
+        central_container = QWidget(self)
+        self.setCentralWidget(central_container)
 
-        self.editor_stack = QStackedWidget()
-        self.editor_stack.addWidget(self.preset_editor_widget.json_editor_container)
-        self.editor_stack.addWidget(self.llm_editor_widget)
-        left_pane_layout.addWidget(self.editor_stack)
+        main_layout = QHBoxLayout(central_container)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
-        self.splitter.addWidget(self.left_pane_widget)
-        self.splitter.addWidget(self.main_panel_widget)
+        self.navigation_list = QListWidget()
+        self.navigation_list.setObjectName("mainNavigationList")
+        self.navigation_list.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.navigation_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.navigation_list.setFixedWidth(200)
+        main_layout.addWidget(self.navigation_list)
+
+        self.content_container = QWidget()
+        content_layout = QVBoxLayout(self.content_container)
+        content_layout.setContentsMargins(0, 0, 0, 0)
+        content_layout.setSpacing(0)
+        main_layout.addWidget(self.content_container, 1)
+
+        self.views_stack = QStackedWidget()
+        content_layout.addWidget(self.views_stack, 1)
+
+        content_layout.addWidget(self.log_console)
+
+        self._register_view("Workspace", self._build_workspace_view())
+        self._register_view("Library", self._build_library_view())
+        self._register_view("Settings", self._build_settings_view())
+
+        self.navigation_list.currentRowChanged.connect(self.views_stack.setCurrentIndex)
+        self.select_view("Workspace")
 
         # --- Setup UI Elements ---
         # Main panel UI is handled internally by MainPanelWidget
@@ -204,9 +221,6 @@ class MainWindow(QMainWindow):
         self.unified_model.assetNameChanged.connect(self.restructure_handler.handle_asset_name_changed)
         # --- Connect LLM Editor Signals ---
         self.llm_editor_widget.settings_saved.connect(self._on_llm_settings_saved)
-
-        # --- Adjust Splitter ---
-        self.splitter.setSizes([400, 800])
 
         # --- Initialize Keybind Map ---
         self.key_char_to_qt_key = {
@@ -901,6 +915,136 @@ class MainWindow(QMainWindow):
         self.log_handler.log_record_received.connect(self.log_console._append_log_message)
         log.info("UI Log Handler Initialized.")
 
+    def _register_view(self, name: str, widget: QWidget) -> None:
+        """Registers a top-level view and adds it to the navigation sidebar."""
+        row = self.navigation_list.count()
+        self.navigation_list.addItem(name)
+        self.views_stack.addWidget(widget)
+        self._view_name_to_index[name.lower()] = row
+
+    def _build_workspace_view(self) -> QWidget:
+        """Creates the Workspace view container hosting the main panel widget."""
+        container = QWidget()
+        layout = QVBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+        layout.addWidget(self.main_panel_widget)
+        return container
+
+    def _build_library_view(self) -> QWidget:
+        """Creates a stubbed Library view placeholder."""
+        container = QWidget()
+        layout = QVBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+        layout.addStretch()
+        placeholder = QLabel("Library view coming soon.")
+        placeholder.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(placeholder)
+        layout.addStretch()
+        return container
+
+    def _build_settings_view(self) -> QWidget:
+        """Creates the Settings view with category navigation and editors."""
+        container = QWidget()
+        layout = QHBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+
+        self.settings_nav_list = QListWidget()
+        self.settings_nav_list.setObjectName("settingsNavigationList")
+        self.settings_nav_list.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.settings_nav_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.settings_nav_list.setFixedWidth(220)
+        layout.addWidget(self.settings_nav_list)
+
+        self.settings_stack = QStackedWidget()
+        layout.addWidget(self.settings_stack, 1)
+
+        self._settings_category_to_row.clear()
+
+        self._add_settings_category("Presets", self._build_preset_settings_page())
+        self._add_settings_category("LLM", self.llm_editor_widget)
+
+        placeholder_categories = [
+            "General",
+            "File Types",
+            "Asset Types",
+            "Suppliers",
+            "Classification",
+            "Processing",
+            "Indexing",
+        ]
+        for category_name in placeholder_categories:
+            message = f"{category_name} settings coming soon."
+            self._add_settings_category(category_name, self._create_placeholder_settings_widget(message))
+
+        self.settings_nav_list.currentRowChanged.connect(self.settings_stack.setCurrentIndex)
+
+        initial_row = self._settings_category_to_row.get("presets", 0)
+        self.settings_nav_list.setCurrentRow(initial_row)
+        self.settings_stack.setCurrentIndex(initial_row)
+
+        return container
+
+    def _build_preset_settings_page(self) -> QWidget:
+        """Creates the Presets settings page combining selector and editor widgets."""
+        container = QWidget()
+        layout = QVBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+        layout.addWidget(self.preset_editor_widget.selector_container)
+        layout.addWidget(self.preset_editor_widget.json_editor_container, 1)
+        return container
+
+    def _add_settings_category(self, name: str, widget: QWidget) -> None:
+        """Adds a settings category to the navigation list and stacked widget."""
+        row = self.settings_nav_list.count()
+        self.settings_nav_list.addItem(name)
+        self.settings_stack.addWidget(widget)
+        self._settings_category_to_row[name.lower()] = row
+
+    def _create_placeholder_settings_widget(self, message: str) -> QWidget:
+        """Creates a placeholder widget for settings categories not yet implemented."""
+        container = QWidget()
+        layout = QVBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+        layout.addStretch()
+        label = QLabel(message)
+        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(label)
+        layout.addStretch()
+        return container
+
+    def select_view(self, view_name: str) -> None:
+        """Programmatically selects a top-level view by name."""
+        if not view_name:
+            return
+        if not hasattr(self, 'navigation_list') or not hasattr(self, 'views_stack'):
+            log.warning("Navigation widgets are not initialized; cannot switch views.")
+            return
+        index = self._view_name_to_index.get(view_name.lower())
+        if index is None:
+            log.warning(f"Unknown view requested: {view_name}")
+            return
+        self.navigation_list.setCurrentRow(index)
+        self.views_stack.setCurrentIndex(index)
+
+    def select_settings_category(self, category_name: str) -> None:
+        """Programmatically selects a settings category by name."""
+        if not category_name:
+            return
+        if not hasattr(self, 'settings_nav_list') or not hasattr(self, 'settings_stack'):
+            log.warning("Settings navigation widgets are not initialized; cannot switch categories.")
+            return
+        row = self._settings_category_to_row.get(category_name.lower())
+        if row is None:
+            log.warning(f"Unknown settings category requested: {category_name}")
+            return
+        self.settings_nav_list.setCurrentRow(row)
+        self.settings_stack.setCurrentIndex(row)
+
     @Slot()
     def _open_config_editor(self):
         """Opens the configuration editor dialog."""
@@ -1087,7 +1231,7 @@ class MainWindow(QMainWindow):
             # Force reset the LLM handler state in case it got stuck
             if hasattr(self, 'llm_interaction_handler'):
                 self.llm_interaction_handler.force_reset_state()
-            self.editor_stack.setCurrentWidget(self.llm_editor_widget)
+            self.select_settings_category("LLM")
             # Load settings *after* switching the stack
             try:
                 self.llm_editor_widget.load_settings()
@@ -1096,10 +1240,10 @@ class MainWindow(QMainWindow):
                 QMessageBox.critical(self, "LLM Settings Error", f"Failed to load LLM settings:\n{e}")
         elif mode == "preset":
             log.debug("Switching editor stack to Preset JSON Editor Widget.")
-            self.editor_stack.setCurrentWidget(self.preset_editor_widget.json_editor_container)
+            self.select_settings_category("Presets")
         else:
             log.debug("Switching editor stack to Preset JSON Editor Widget (placeholder selected).")
-            self.editor_stack.setCurrentWidget(self.preset_editor_widget.json_editor_container)
+            self.select_settings_category("Presets")
             # The PresetEditorWidget's internal logic handles disabling/clearing the editor fields.
 
         if mode == "preset" and display_name: # Use display_name for window title
