@@ -270,6 +270,9 @@ class AutoTester(QObject):
             self.cleanup_and_exit(success=False)
             return
 
+        if hasattr(self.main_window, "select_view"):
+            self.main_window.select_view("Workspace")
+
         # Connect signals
         if hasattr(self.app_instance, 'all_tasks_finished') and isinstance(self.app_instance.all_tasks_finished, Signal):
             self.app_instance.all_tasks_finished.connect(self._on_all_tasks_finished)
@@ -347,6 +350,10 @@ class AutoTester(QObject):
         logger.info(f"Step 2: Selecting preset: {preset_to_use}") # KEEP INFO - Passes filter
         # The print statement below already uses preset_to_use, which is good.
         print(f"DEBUG: Attempting to select preset: '{preset_to_use}' (derived from expected: {preset_to_use == self.expected_rules_data.get('source_rules',[{}])[0].get('preset_name') if self.expected_rules_data.get('source_rules') else 'N/A'}, cli_arg: {self.cli_args.preset})")
+        if hasattr(self.main_window, "select_view"):
+            self.main_window.select_view("Settings")
+        if hasattr(self.main_window, "select_settings_category"):
+            self.main_window.select_settings_category("Presets")
         preset_found = False
         preset_list_widget = self.main_window.preset_editor_widget.editor_preset_list
         for i in range(preset_list_widget.count()):
@@ -364,6 +371,9 @@ class AutoTester(QObject):
             print(f"DEBUG: Failed to find preset '{preset_to_use}'. Available: {available_presets}")
             self.cleanup_and_exit(success=False)
             return
+
+        if hasattr(self.main_window, "select_view"):
+            self.main_window.select_view("Workspace")
 
         # Step 3: Await Prediction Completion
         self.test_step = "AWAITING_PREDICTION"
