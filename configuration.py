@@ -905,7 +905,95 @@ class Configuration:
         # For now, we rely on the order they appear in the config.
         return keybinds
 
-# The global load_base_config() is effectively replaced by Configuration.__init__
+# NOTE: Legacy helper shims -------------------------------------------------
+
+def load_base_config(
+    base_dir_user_config: Optional[Union[str, os.PathLike, Path]] = None,
+    *,
+    is_first_run_setup: bool = False,
+) -> dict:
+    """Loads the merged base configuration for the GUI.
+
+    This helper mirrors the historical ``load_base_config`` function that many
+    GUI components still import.  It reuses the Configuration class' loading
+    helpers so that user overrides and the fallback copy logic continue to
+    apply exactly as they do for the main configuration object.
+
+    Args:
+        base_dir_user_config: Optional explicit user configuration root.  When
+            omitted the placeholder getter is used which allows external code
+            (or future integrations) to supply the persisted path.
+        is_first_run_setup: Propagated to the helper logic so the same
+            safeguards around first-time setup copying are honoured.
+
+    Returns:
+        A dictionary containing the combined application settings merged with
+        any user overrides and enriched with the asset/file definition data the
+        GUI expects.
+    """
+
+    if base_dir_user_config is None:
+        base_dir_user_config = _get_user_config_path_placeholder()
+
+    resolved_user_path: Optional[Path]
+    if base_dir_user_config:
+        resolved_user_path = Path(base_dir_user_config)
+    else:
+        resolved_user_path = None
+
+    # Instantiate a bare Configuration object so we can reuse the robust
+    # loading helpers without triggering preset loading.
+    loader = Configuration.__new__(Configuration)
+    loader.is_first_run_setup = is_first_run_setup
+    loader.base_dir_user_config = resolved_user_path
+    loader.base_dir_app_bundled = loader._determine_base_dir_app_bundled()
+
+    app_settings_path = (
+        loader.base_dir_app_bundled
+        / loader.BASE_DIR_APP_BUNDLED_CONFIG_SUBDIR_NAME
+        / loader.APP_SETTINGS_FILENAME
+    )
+
+    base_settings = loader._load_json_file(
+        app_settings_path,
+        is_critical=True,
+        description="Core application settings",
+    )
+
+    if not isinstance(base_settings, dict):
+        raise ConfigurationError(
+            f"Core application settings must be a dictionary, got {type(base_settings)}."
+        )
+
+    if loader.base_dir_user_config:
+        user_settings_path = loader.base_dir_user_config / loader.USER_SETTINGS_FILENAME
+        user_overrides = loader._load_json_file(
+            user_settings_path,
+            is_critical=False,
+            description=f"User settings from {user_settings_path}",
+        )
+        if user_overrides:
+            if not isinstance(user_overrides, dict):
+                raise ConfigurationError(
+                    "User settings must be a dictionary when present."
+                )
+            _deep_merge_dicts(base_settings, user_overrides)
+    else:
+        log.debug(
+            "load_base_config: No user config directory set; using bundled defaults only."
+        )
+
+    base_settings["ASSET_TYPE_DEFINITIONS"] = loader._load_definition_file_with_fallback(
+        loader.ASSET_TYPE_DEFINITIONS_FILENAME,
+        "ASSET_TYPE_DEFINITIONS",
+    )
+    base_settings["FILE_TYPE_DEFINITIONS"] = loader._load_definition_file_with_fallback(
+        loader.FILE_TYPE_DEFINITIONS_FILENAME,
+        "FILE_TYPE_DEFINITIONS",
+    )
+
+    return base_settings
+
 # Global save/load functions for individual files are refactored to be methods
 # of the Configuration class or called by them, using instance paths.
 
