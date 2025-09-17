@@ -2,6 +2,7 @@ import argparse
 import sys
 import time
 import os
+import json
 import logging
 from pathlib import Path
 import re # Added for checking incrementing token
@@ -31,7 +32,7 @@ print(f"DEBUG: sys.path after append: {sys.path}")
 
 try:
     print("DEBUG: Attempting to import Configuration...")
-    from configuration import Configuration, ConfigurationError
+    from configuration import Configuration, ConfigurationError, get_available_preset_names
     print("DEBUG: Successfully imported Configuration.")
 
     print("DEBUG: Attempting to import ProcessingEngine...")
@@ -305,9 +306,17 @@ class App(QObject):
     # Signal emitted when all queued processing tasks are complete
     all_tasks_finished = Signal(int, int, int) # processed_count, skipped_count, failed_count (Placeholder counts for now)
 
-    def __init__(self, user_config_path: str):
+    def __init__(self, user_config_path: str | Path | None = None, preset_name: str | None = None):
         super().__init__()
-        self.user_config_path = user_config_path # Store the determined user config path
+        # Normalize the provided paths/overrides
+        if isinstance(user_config_path, Path):
+            self.user_config_path = user_config_path
+        elif user_config_path:
+            self.user_config_path = Path(user_config_path)
+        else:
+            self.user_config_path = None
+
+        self._preset_override = preset_name.strip() if isinstance(preset_name, str) and preset_name.strip() else None
         self.config_obj = None
         self.processing_engine = None
         self.main_window = None
@@ -316,17 +325,111 @@ class App(QObject):
         self._task_results = {"processed": 0, "skipped": 0, "failed": 0}
         log.info(f"Maximum threads for pool: {self.thread_pool.maxThreadCount()}")
 
-        self._load_config(self.user_config_path) # Pass the user config path
+        self.active_preset_name = None
+
+        self._load_config(self.user_config_path, self._preset_override)
         self._init_engine()
         self._init_gui()
 
-    def _load_config(self, user_config_path: str):
+    def _determine_app_base_dir(self) -> Path:
+        """Matches Configuration's bundled base dir detection."""
+        if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+            return Path(sys._MEIPASS)
+        return Path(__file__).resolve().parent
+
+    def _read_saved_preset_name(self, user_config_dir: Path | None) -> str | None:
+        """Attempts to read a persisted preset preference from user settings."""
+        if not user_config_dir:
+            return None
+
+        possible_paths = [
+            user_config_dir / Configuration.USER_SETTINGS_FILENAME,
+            user_config_dir / Configuration.USER_CONFIG_SUBDIR_NAME / Configuration.USER_SETTINGS_FILENAME,
+        ]
+        preset_keys = (
+            "default_gui_preset",
+            "default_preset",
+            "default_preset_name",
+            "last_used_preset",
+            "last_selected_preset",
+        )
+
+        for settings_path in possible_paths:
+            if not settings_path.is_file():
+                continue
+            try:
+                with open(settings_path, "r", encoding="utf-8") as settings_file:
+                    settings_data = json.load(settings_file)
+            except json.JSONDecodeError as exc:
+                log.warning(f"Could not parse user settings JSON at '{settings_path}': {exc}")
+                continue
+            except OSError as exc:
+                log.warning(f"Could not read user settings file '{settings_path}': {exc}")
+                continue
+
+            # Try direct keys first
+            if isinstance(settings_data, dict):
+                for key in preset_keys:
+                    value = settings_data.get(key)
+                    if isinstance(value, str) and value.strip():
+                        return value.strip()
+
+                general_settings = settings_data.get("general_settings")
+                if isinstance(general_settings, dict):
+                    for key in preset_keys:
+                        value = general_settings.get(key)
+                        if isinstance(value, str) and value.strip():
+                            return value.strip()
+
+        return None
+
+    def _determine_initial_preset(self, user_config_dir: Path | None, preset_override: str | None) -> str:
+        """Determines which preset should be used when loading configuration."""
+        base_dir_app_bundled = self._determine_app_base_dir()
+        available_presets = get_available_preset_names(user_config_dir, base_dir_app_bundled)
+        available_lookup = {name.lower(): name for name in available_presets}
+
+        def resolve_candidate(candidate: str | None) -> str | None:
+            if not candidate:
+                return None
+            normalized = candidate.strip().lower()
+            resolved_name = available_lookup.get(normalized)
+            if resolved_name:
+                return resolved_name
+            log.warning(f"Requested preset '{candidate}' not found among available presets: {available_presets}")
+            return None
+
+        preset_candidate = resolve_candidate(preset_override)
+        if not preset_candidate:
+            preset_candidate = resolve_candidate(self._read_saved_preset_name(user_config_dir))
+
+        if not preset_candidate:
+            # Fallback to bundled defaults in a predictable order (skip templates if possible)
+            non_template_presets = [name for name in available_presets if not name.startswith('_')]
+            preset_candidate = (non_template_presets or available_presets)[0] if available_presets else None
+
+        if not preset_candidate:
+            raise ConfigurationError(
+                "No presets available to initialize configuration. Ensure at least one preset JSON file exists."
+            )
+
+        return preset_candidate
+
+    def _load_config(self, user_config_path: Path | None, preset_override: str | None = None):
         """Loads the base configuration using the determined user config path."""
         try:
-            # Initialize Configuration with the determined user config path
-            # The Configuration class is responsible for finding presets and other configs
-            self.config_obj = Configuration(base_dir_user_config=user_config_path)
-            log.info(f"Base configuration loaded using user config path: '{user_config_path}'.")
+            actual_user_config_dir = user_config_path if isinstance(user_config_path, Path) else None
+            preset_to_use = self._determine_initial_preset(actual_user_config_dir, preset_override)
+            self.config_obj = Configuration(
+                preset_name=preset_to_use,
+                base_dir_user_config=actual_user_config_dir,
+            )
+            self.active_preset_name = preset_to_use
+            log.info(
+                "Base configuration loaded using preset '%s' and user config path '%s'.",
+                preset_to_use,
+                actual_user_config_dir if actual_user_config_dir else "<bundled defaults>",
+            )
         except ConfigurationError as e:
             log.error(f"Fatal: Failed to load base configuration using user config path '{user_config_path}': {e}")
             # In a real app, show this error to the user before exiting
@@ -425,8 +528,8 @@ if __name__ == "__main__":
     setup_logging(args.verbose)
 
     # Determine mode based on presence of required CLI args
-    if args.input_paths or args.preset:
-        # If either input_paths or preset is provided, assume CLI mode
+    if not args.gui and (args.input_paths or args.preset):
+        # If either input_paths or preset is provided (and GUI not forced), assume CLI mode
         # run_cli will handle validation that *both* are actually present
         log.info("CLI arguments detected (input_paths or preset), attempting CLI mode.")
         run_cli(args)
@@ -484,7 +587,9 @@ if __name__ == "__main__":
                  sys.exit(1)
 
 
-            app_instance = App(user_config_path) # Pass the determined path
+            preset_override = args.preset if args.gui and args.preset else None
+
+            app_instance = App(user_config_path=user_config_path, preset_name=preset_override)
             app_instance.run()
 
             sys.exit(qt_app.exec())
